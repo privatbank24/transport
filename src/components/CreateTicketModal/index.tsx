@@ -14,6 +14,23 @@ export const CreateTicketModal: FC<CreateTicketModalProps> = ({
 }: CreateTicketModalProps) => {
   const [price, setPrice] = useState<number>(8);
   const [quantity, setQuantity] = useState<number>(1);
+  const [vagon, setVagon] = useState<string>("276");
+  const tickets: any = JSON.parse(localStorage.getItem("tickets")!);
+
+  const createTicket = () => {
+    const currDate = new Date();
+    let ticket = {
+      date: currDate,
+      time: currDate.toTimeString(),
+      quantity,
+      price,
+      vagon,
+    };
+    const newArr = tickets;
+    newArr.push(ticket);
+    localStorage.setItem("tickets", JSON.stringify(newArr));
+    setOpen(false);
+  };
 
   return (
     <Modal open={open} className="create-ticket">
@@ -48,9 +65,16 @@ export const CreateTicketModal: FC<CreateTicketModalProps> = ({
                 +
               </Button>
             </section>
+            <label htmlFor="vagon">Номер вагона</label>
+            <input
+              value={vagon}
+              type="text"
+              id="vagon"
+              onChange={(e: any) => setVagon(e.target.value)}
+            />
           </div>
           <div className="create-ticket__content_bottom">
-            <Button>Оплатить</Button>
+            <Button onClick={createTicket}>Оплатить</Button>
           </div>
         </div>
       </Fade>

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import "./index.scss";
 import { TransportAnimation } from "../TransportAnimation";
 import vtk from "../../images/vtk.png";
@@ -8,13 +8,15 @@ type TicketProps = {
   time?: string;
   quantity?: number;
   price?: number;
+  vagon?: string;
 };
 
 export const Ticket: FC<TicketProps> = ({
   date = "123",
   time = "321",
-  quantity = 2,
+  quantity = 1,
   price = 8,
+  vagon = "276",
 }: TicketProps) => {
   return (
     <div className="ticket">
@@ -31,15 +33,22 @@ export const Ticket: FC<TicketProps> = ({
         </div>
       </div>
       <div className="ticket__main">
-        <TransportAnimation />
+        <TransportAnimation vagon={vagon} />
         <div className="ticket__main_right">
           <div>
             <h2>Дата</h2>
-            <p>{date}</p>
+            <p>
+              {date
+                .slice(0, 10)
+                .split("-")
+                .reverse()
+                .join("-")
+                .replaceAll("-", ".")}
+            </p>
           </div>
           <div>
             <h2>Время</h2>
-            <p>{time}</p>
+            <p>{time.slice(0, 8)}</p>
           </div>
           <div>
             <h2>Стандартный</h2>

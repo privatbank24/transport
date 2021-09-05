@@ -1,10 +1,16 @@
-import React from "react";
+import React, { FC } from "react";
 import "./index.scss";
 import busIcon from "../../images/busIcon.png";
 import tramIcon from "../../images/tramIcon.png";
 import trolIcon from "../../images/trolIcon.png";
 
-export const TransportAnimation = () => {
+interface TransportAnimationProps {
+  vagon: string;
+}
+
+export const TransportAnimation: FC<TransportAnimationProps> = ({
+  vagon,
+}: TransportAnimationProps) => {
   return (
     <div className="transport">
       <div className="transport__top">
@@ -31,7 +37,7 @@ export const TransportAnimation = () => {
         </div>
       </div>
       <p>Вагон №</p>
-      <h2>276</h2>
+      <h2>{vagon}</h2>
     </div>
   );
 };

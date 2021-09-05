@@ -7,6 +7,13 @@
    padding: 15px;
    height: 100vh;
 
+   h1{
+      margin-top: 200px;
+      text-align: center;
+      color: $main-grey-1;
+      font-size: 20px;
+   }
+
    button{
       background: $main-green-2;
       border-radius: 10px;
