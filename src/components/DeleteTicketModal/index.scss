@@ -1,0 +1,46 @@
+@import '/src/variables.scss';
+
+.delete-ticket{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   &__content{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 80vw;
+      height: 20vh;
+      padding: 20px;
+      border-radius: 10px;
+      background: $main-dark-3;
+      border: 1px solid $main-grey-2;
+
+      h2{
+         margin-top: 40px;
+         text-align: center;
+         font-size: 20px;
+         color: $main-grey-1;
+      }
+
+      div{
+         display: flex;
+         justify-content: space-between;
+
+         button{
+            span{
+               text-transform: none;
+               font-size: 18px;
+            }
+
+            &:nth-of-type(1){
+               background: $main-dark-1;
+            }
+
+            &:nth-of-type(2){
+               background: $main-green-2;
+            }
+         }
+      }
+   }
+}

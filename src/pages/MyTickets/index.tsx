@@ -1,19 +1,37 @@
 import { Button } from "@material-ui/core";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { CreateTicketModal } from "../../components/CreateTicketModal";
+import { DeleteTicketModal } from "../../components/DeleteTicketModal";
 import { Ticket } from "../../components/Ticket";
 import "./index.scss";
 
 export const MyTickets = () => {
   const [isCreateModalOpened, setIsCreateModalOpened] =
     useState<boolean>(false);
-  const tickets: any = JSON.parse(localStorage.getItem("tickets")!);
+  const [isDeleteModalOpened, setIsDeleteModalOpened] =
+    useState<boolean>(false);
+  const [activeTicket, setActiveTicket] = useState<string>("");
+  const [tickets, setTickets] = useState(
+    JSON.parse(localStorage.getItem("tickets")!)
+  );
 
   useEffect(() => {
     if (!tickets) {
       localStorage.setItem("tickets", JSON.stringify([]));
     }
   }, []);
+
+  useEffect(() => {
+    if (activeTicket) setIsDeleteModalOpened(true);
+  }, [activeTicket]);
+
+  useEffect(() => {
+    if (isDeleteModalOpened) setActiveTicket("");
+  }, [isDeleteModalOpened]);
+
+  useEffect(() => {
+    console.log("tickets");
+  }, [tickets]);
 
   return (
     <>
@@ -23,13 +41,16 @@ export const MyTickets = () => {
             <>
               {tickets.map((item: any, index: number) => {
                 return (
-                  <Ticket
-                    date={item.date}
-                    time={item.time}
-                    quantity={item.quantity}
-                    price={item.price}
-                    vagon={item.vagon}
-                  />
+                  <Fragment key={item.date + item.time}>
+                    <Ticket
+                      setActiveTicket={setActiveTicket}
+                      date={item.date}
+                      time={item.time}
+                      quantity={item.quantity}
+                      price={item.price}
+                      vagon={item.vagon}
+                    />
+                  </Fragment>
                 );
               })}
             </>
@@ -44,6 +65,11 @@ export const MyTickets = () => {
       <CreateTicketModal
         open={isCreateModalOpened}
         setOpen={setIsCreateModalOpened}
+      />
+      <DeleteTicketModal
+        activeTicket={activeTicket}
+        open={isDeleteModalOpened}
+        setOpen={setIsDeleteModalOpened}
       />
     </>
   );

@@ -1,14 +1,18 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import "./index.scss";
 import { TransportAnimation } from "../TransportAnimation";
 import vtk from "../../images/vtk.png";
+import Timer from "../Timer";
+import moment from "moment";
+import { useSwipeable } from "react-swipeable";
 
 type TicketProps = {
-  date?: string;
+  date?: any;
   time?: string;
   quantity?: number;
   price?: number;
   vagon?: string;
+  setActiveTicket: (value: string) => void;
 };
 
 export const Ticket: FC<TicketProps> = ({
@@ -17,9 +21,23 @@ export const Ticket: FC<TicketProps> = ({
   quantity = 1,
   price = 8,
   vagon = "276",
+  setActiveTicket,
 }: TicketProps) => {
+  const [minutes, setMinutes] = useState<number>(0);
+
+  useEffect(() => {
+    const currentDate = new Date();
+    console.log("currentDate ", currentDate);
+    console.log("date ", date);
+    setMinutes(60 - Number(moment(date).from(currentDate).split(" ")[0]));
+  }, []);
+
+  const handlers = useSwipeable({
+    onSwipedLeft: (e: any) => setActiveTicket(time),
+  });
+
   return (
-    <div className="ticket">
+    <div className="ticket" {...handlers}>
       <div className="ticket__top">
         <div className="ticket__top_left">
           <img src={vtk} alt="logo" />
@@ -66,7 +84,7 @@ export const Ticket: FC<TicketProps> = ({
       </div>
       <div className="ticket__bottom">
         <h2>Билет разового использования</h2>
-        <p>00:40:12</p>
+        {minutes && <Timer initialMinute={minutes} initialSeconds={1} />}
       </div>
     </div>
   );
