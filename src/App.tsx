@@ -1,7 +1,27 @@
-import React from "react";
+import React, { FC } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import "./index.scss";
+import { MyTickets } from "./pages/MyTickets";
+import { ROUTES } from "./utils/routes";
 
-function App() {
-  return <div className="App"></div>;
-}
+export const App: FC = () => {
+  return (
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route path={ROUTES.MY_TICKETS}>
+            <MyTickets />
+          </Route>
+          <Route path={ROUTES.HOME}>
+            <h1>home</h1>
+          </Route>
+          <Route path={ROUTES.LOGIN}>
+            <h1>login</h1>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
+};
 
 export default App;
