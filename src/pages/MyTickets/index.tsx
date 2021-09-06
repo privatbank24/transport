@@ -11,9 +11,7 @@ export const MyTickets = () => {
   const [isDeleteModalOpened, setIsDeleteModalOpened] =
     useState<boolean>(false);
   const [activeTicket, setActiveTicket] = useState<string>("");
-  const [tickets, setTickets] = useState(
-    JSON.parse(localStorage.getItem("tickets")!)
-  );
+  const tickets = JSON.parse(localStorage.getItem("tickets")!);
 
   useEffect(() => {
     if (!tickets) {
@@ -29,10 +27,6 @@ export const MyTickets = () => {
     if (isDeleteModalOpened) setActiveTicket("");
   }, [isDeleteModalOpened]);
 
-  useEffect(() => {
-    console.log("tickets");
-  }, [tickets]);
-
   return (
     <>
       <div className="my-tickets">
@@ -41,11 +35,10 @@ export const MyTickets = () => {
             <>
               {tickets.map((item: any, index: number) => {
                 return (
-                  <Fragment key={item.date + item.time}>
+                  <Fragment key={item.date}>
                     <Ticket
                       setActiveTicket={setActiveTicket}
                       date={item.date}
-                      time={item.time}
                       quantity={item.quantity}
                       price={item.price}
                       vagon={item.vagon}

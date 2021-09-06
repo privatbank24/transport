@@ -21,7 +21,6 @@ export const CreateTicketModal: FC<CreateTicketModalProps> = ({
     const currDate = new Date();
     let ticket = {
       date: currDate,
-      time: currDate.toTimeString(),
       quantity,
       price,
       vagon,
