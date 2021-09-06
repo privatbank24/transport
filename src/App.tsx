@@ -6,6 +6,7 @@ import { SignIn } from "./pages/SignIn";
 import { ROUTES } from "./utils/routes";
 import history from "./utils/history";
 import { checkToken } from "./actions/authentication";
+import { MainLayoutWrapper } from "./components/MainLayoutWrapper";
 
 export const App: FC = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -24,14 +25,14 @@ export const App: FC = () => {
     <Router>
       <div className="App">
         <Switch>
-          {/* {!!token && ( */}
-          <Route exact path={ROUTES.MY_TICKETS}>
-            <MyTickets />
-          </Route>
-          {/* )} */}
-          <Route path={ROUTES.LOGIN}>
+          <Route exact path={ROUTES.LOGIN}>
             <SignIn />
           </Route>
+          <MainLayoutWrapper>
+            <Route exact path={ROUTES.MY_TICKETS}>
+              <MyTickets />
+            </Route>
+          </MainLayoutWrapper>
         </Switch>
       </div>
     </Router>

@@ -25,7 +25,7 @@ export const checkToken = async (): Promise<void> => {
          });
       } catch (error: any) {
          console.log(error.message);
-         window.location.href = 'http://localhost:3001/';
+         window.location.href = 'http://192.168.88.219:3001/';
          throw error;
       }
    }

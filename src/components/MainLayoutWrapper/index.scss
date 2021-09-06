@@ -1,0 +1,29 @@
+@import '/src/variables.scss';
+
+.main-layout__navbar{
+   position: absolute;
+   z-index: 1000;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-end;
+   width: 100vw;
+   height: 100vh;
+   padding: 30px;
+   background: $main-green-2;
+   transform: translateX(-100%);
+   transition: 0.3s;
+
+   &.opened{
+      transform: translateX(0%);
+   }
+
+   button{
+      margin-top: 20px;
+      background: $main-grey-2;
+      border-radius: 15px;
+
+      &:hover{
+         background: $main-grey-2;
+      }
+   }
+}
