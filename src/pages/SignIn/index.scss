@@ -1,0 +1,64 @@
+@import '/src/variables.scss';
+
+.login{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 100vh;
+
+   &__content{
+      display: flex;
+      flex-direction: column;
+      width: 80vw;
+      height: 50vh;
+
+      h1{
+         text-align: center;
+      }
+
+      p{
+         max-height: 100px;
+         margin-top: 20px;
+         text-align: center;
+         color: $main-green-1;
+         transition: 0.3s;
+
+         &.hidden{
+            max-height: 0;
+            opacity: 0;
+            visibility: hidden;
+         }
+      }
+
+      input{
+         height: 40px;
+         margin-top: 20px;
+         padding: 10px;
+         background: $main-grey-2;
+         border: 1px solid $main-grey-1;
+         border-radius: 10px;
+         font-size: 17px;
+         transition: 0.3s;
+
+         &:focus{
+            background: $main-dark-1;
+         }
+      }
+
+      button{
+         width: 100%;
+         margin-top: 30px;
+         background: $main-green-2;
+         border-radius: 10px;
+
+         span{
+            text-transform: none;
+            color: white;
+         }
+
+         &:disabled{
+            background: $main-grey-2;
+         }
+      }
+   }
+}
