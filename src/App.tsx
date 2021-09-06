@@ -12,9 +12,6 @@ export const App: FC = () => {
           <Route path={ROUTES.MY_TICKETS}>
             <MyTickets />
           </Route>
-          <Route path={ROUTES.HOME}>
-            <h1>home</h1>
-          </Route>
           <Route path={ROUTES.LOGIN}>
             <h1>login</h1>
           </Route>

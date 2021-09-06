@@ -17,6 +17,7 @@
          img{
             width: 16px;
             margin: 3px;
+            animation: fade 4s infinite;
          }
       }
    }
@@ -28,5 +29,17 @@
 
    h2{
       margin-top: 5px;
+   }
+}
+
+@keyframes fade {
+   0%{
+      opacity: 1;
+   }
+   50%{
+      opacity: 0;
+   }
+   100%{
+      opacity: 1;
    }
 }
