@@ -4,7 +4,7 @@ import { ROUTES } from "../utils/routes";
 
 export const signIn = async (username: string, password: string): Promise<void> => {
    try {
-      const res = await axios.post('http://192.168.88.219:3000/auth/signin', {
+      const res = await axios.post('http://192.168.88.193:3000/auth/signin', {
          username,
          password
       })
@@ -20,12 +20,12 @@ export const checkToken = async (): Promise<void> => {
    if (history.location.pathname !== ROUTES.LOGIN) {
       try {
          const token = localStorage.getItem('token');
-         await axios.get('http://192.168.88.219:3000/tasks', {
+         await axios.get('http://192.168.88.193:3000/tasks', {
             headers: { 'Authorization': `Bearer ${token}`}
          });
       } catch (error: any) {
          console.log(error.message);
-         window.location.href = 'http://192.168.88.219:3001/';
+         window.location.href = 'http://192.168.88.193:3001/';
          throw error;
       }
    }

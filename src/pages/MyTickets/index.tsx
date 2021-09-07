@@ -30,10 +30,10 @@ export const MyTickets = () => {
   return (
     <>
       <div className="my-tickets">
-        <div>
+        <div className="my-tickets__container">
           {!!tickets && !!tickets.length ? (
             <>
-              {tickets.map((item: any, index: number) => {
+              {tickets.reverse().map((item: any, index: number) => {
                 return (
                   <Fragment key={item.date}>
                     <Ticket
@@ -48,7 +48,7 @@ export const MyTickets = () => {
               })}
             </>
           ) : (
-            <h1>Нету активных билетов</h1>
+            <h1>Нет активных билетов</h1>
           )}
         </div>
         <Button onClick={() => setIsCreateModalOpened(true)}>
