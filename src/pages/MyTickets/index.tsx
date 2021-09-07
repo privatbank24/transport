@@ -1,6 +1,5 @@
 import { Button } from "@material-ui/core";
 import React, { useState, useEffect, Fragment } from "react";
-import { CreateTicketModal } from "../../components/CreateTicketModal";
 import { DeleteTicketModal } from "../../components/DeleteTicketModal";
 import { Ticket } from "../../components/Ticket";
 import { TicketScanner } from "../../components/TicketScanner";

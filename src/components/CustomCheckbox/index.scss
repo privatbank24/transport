@@ -1,0 +1,23 @@
+@import '/src/variables.scss';
+
+.custom-checkbox{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 20px;
+   height: 20px;
+   border: 1px solid white;
+   border-radius: 100px;
+
+   svg{
+      fill: $main-green-2;
+      transition: 0.1s;
+   }
+
+   &.unchecked{
+      svg{
+         opacity: 0;
+         visibility: hidden;
+      } 
+   }
+}

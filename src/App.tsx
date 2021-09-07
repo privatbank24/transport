@@ -8,6 +8,7 @@ import history from "./utils/history";
 import { checkToken } from "./actions/authentication";
 import { MainLayoutWrapper } from "./components/MainLayoutWrapper";
 import { MyTravelCards } from "./pages/MyTravelCards";
+import { PayForTicketPage } from "./pages/PayForTicketPage";
 
 export const App: FC = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -35,6 +36,9 @@ export const App: FC = () => {
             </Route>
             <Route exact path={ROUTES.MY_TRAVEL_CARDS}>
               <MyTravelCards />
+            </Route>
+            <Route exact path={ROUTES.PAY_FOR_TICKET}>
+              <PayForTicketPage />
             </Route>
           </MainLayoutWrapper>
         </Switch>

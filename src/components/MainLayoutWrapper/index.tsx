@@ -66,24 +66,27 @@ export const MainLayoutWrapper = ({ children }: any) => {
             <p>Городской транспорт</p>
             <div></div>
           </div>
-          <div className="main-layout__navigation_bottom">
-            <Button
-              onClick={() => {
-                history.push(ROUTES.MY_TICKETS);
-              }}
-              className={activeButton === 1 ? "active" : "disabled"}
-            >
-              Билеты
-            </Button>
-            <Button
-              onClick={() => {
-                history.push(ROUTES.MY_TRAVEL_CARDS);
-              }}
-              className={activeButton === 2 ? "active" : "disabled"}
-            >
-              Проезные
-            </Button>
-          </div>
+          {(window.location.pathname === ROUTES.MY_TICKETS ||
+            window.location.pathname === ROUTES.MY_TRAVEL_CARDS) && (
+            <div className="main-layout__navigation_bottom">
+              <Button
+                onClick={() => {
+                  history.push(ROUTES.MY_TICKETS);
+                }}
+                className={activeButton === 1 ? "active" : "disabled"}
+              >
+                Билеты
+              </Button>
+              <Button
+                onClick={() => {
+                  history.push(ROUTES.MY_TRAVEL_CARDS);
+                }}
+                className={activeButton === 2 ? "active" : "disabled"}
+              >
+                Проезные
+              </Button>
+            </div>
+          )}
         </div>
         <div
           {...navbarHandlers}

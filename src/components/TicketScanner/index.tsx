@@ -4,6 +4,8 @@ import QrReader from "react-qr-reader";
 import "./index.scss";
 import ClearIcon from "@material-ui/icons/Clear";
 import CropOriginalIcon from "@material-ui/icons/CropOriginal";
+import { ROUTES } from "../../utils/routes";
+import { useHistory } from "react-router-dom";
 
 interface TicketScannerProps {
   open: boolean;
@@ -14,6 +16,7 @@ export const TicketScanner: FC<TicketScannerProps> = ({
   open,
   setOpen,
 }: TicketScannerProps) => {
+  const history = useHistory();
   const qrReader = useRef<any>(null);
   const [isLegacyModeActivated, setIsLegacyModeActivated] =
     useState<boolean>(false);
@@ -22,6 +25,7 @@ export const TicketScanner: FC<TicketScannerProps> = ({
     console.log(data);
     if (data) {
       setOpen(false);
+      history.push(ROUTES.PAY_FOR_TICKET);
     }
   };
 
