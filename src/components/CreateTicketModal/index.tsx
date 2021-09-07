@@ -16,6 +16,7 @@ export const CreateTicketModal: FC<CreateTicketModalProps> = ({
   const [quantity, setQuantity] = useState<number>(1);
   const [vagon, setVagon] = useState<string>("276");
   const tickets: any = JSON.parse(localStorage.getItem("tickets")!);
+  const [qr, setQr] = useState<any>("");
 
   const createTicket = () => {
     const currDate = new Date();

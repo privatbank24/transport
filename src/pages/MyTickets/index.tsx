@@ -3,6 +3,7 @@ import React, { useState, useEffect, Fragment } from "react";
 import { CreateTicketModal } from "../../components/CreateTicketModal";
 import { DeleteTicketModal } from "../../components/DeleteTicketModal";
 import { Ticket } from "../../components/Ticket";
+import { TicketScanner } from "../../components/TicketScanner";
 import "./index.scss";
 
 export const MyTickets = () => {
@@ -51,11 +52,11 @@ export const MyTickets = () => {
             <h1>Нет активных билетов</h1>
           )}
         </div>
-        <Button onClick={() => setIsCreateModalOpened(true)}>
+        <Button onClick={() => setIsCreateModalOpened(!isCreateModalOpened)}>
           Отсканировать QR-код
         </Button>
       </div>
-      <CreateTicketModal
+      <TicketScanner
         open={isCreateModalOpened}
         setOpen={setIsCreateModalOpened}
       />
