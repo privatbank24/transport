@@ -104,7 +104,7 @@ export const MainLayoutWrapper = ({ children }: any) => {
           setTimeout(() => {
             setIsNavbarOpened(false);
             localStorage.clear();
-            window.location.href = "http://192.168.88.193:3001/";
+            window.location.href = "http://192.168.0.103:3001/";
           }, 300);
         }}
       />
