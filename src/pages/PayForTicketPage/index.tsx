@@ -8,12 +8,12 @@ import cx from "classnames";
 import { CreateTicketModal } from "../../components/CreateTicketModal";
 import { ROUTES } from "../../utils/routes";
 import { useHistory } from "react-router-dom";
+import { FirtsTimeQRModal } from "../../components/FirstTimeQRModal";
 
 export const PayForTicketPage = () => {
   const [isCheckboxChecked, setIsCheckboxChecked] = useState<boolean>(false);
-  const [isCreateModalOpened, setIsCreateModalOpened] =
-    useState<boolean>(false);
   const [ticketsQuantity, setTicketsQuantity] = useState<number>(0);
+  const [isQRModalOpen, setIsQRModalOpen] = useState<boolean>(false);
   const history = useHistory();
 
   const createTicket = async () => {
@@ -119,15 +119,15 @@ export const PayForTicketPage = () => {
             <p>Всего к оплате</p>
             <p>{ticketsQuantity * 8}.0 UAH</p>
           </div>
-          <Button disabled={!ticketsQuantity} onClick={createTicket}>
+          <Button
+            disabled={!ticketsQuantity}
+            onClick={() => setIsQRModalOpen(true)}
+          >
             Оплатить {ticketsQuantity * 8}.0 UAH
           </Button>
         </div>
       </div>
-      <CreateTicketModal
-        open={isCreateModalOpened}
-        setOpen={setIsCreateModalOpened}
-      />
+      <FirtsTimeQRModal open={isQRModalOpen} setOpen={setIsQRModalOpen} />
     </>
   );
 };
