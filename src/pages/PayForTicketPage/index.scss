@@ -195,6 +195,10 @@
          background: $main-green-2;
          border-radius: 10px;
 
+         &:disabled{
+            background: $main-dark-1;
+         }
+
          &:hover{
             background: $main-green-1;
          }
