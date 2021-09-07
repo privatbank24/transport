@@ -8,6 +8,7 @@ import cx from "classnames";
 
 export const PayForTicketPage = () => {
   const [isCheckboxChecked, setIsCheckboxChecked] = useState<boolean>(false);
+  const [ticketsQuantity, setTicketsQuantity] = useState<number>(0);
 
   return (
     <div className="checkout">
@@ -55,6 +56,8 @@ export const PayForTicketPage = () => {
           <div className="checkout__billing_top">
             <div className="checkout__billing_top_left">
               <CustomCheckbox
+                executiveFunction1={() => setTicketsQuantity(0)}
+                executiveFunction2={() => setTicketsQuantity(1)}
                 isChecked={isCheckboxChecked}
                 setIsChecked={setIsCheckboxChecked}
               />
@@ -69,12 +72,22 @@ export const PayForTicketPage = () => {
           </div>
           <div className="checkout__billing_bottom">
             <div>
-              <Button>-</Button>
-              <p>1</p>
-              <Button>+</Button>
+              <Button
+                onClick={() => {
+                  if (ticketsQuantity > 1) {
+                    setTicketsQuantity(ticketsQuantity - 1);
+                  }
+                }}
+              >
+                -
+              </Button>
+              <p>{ticketsQuantity}</p>
+              <Button onClick={() => setTicketsQuantity(ticketsQuantity + 1)}>
+                +
+              </Button>
             </div>
             <p className="checkout__billing_price">
-              8.00 <span>UAH</span>
+              {ticketsQuantity * 8}.00 <span>UAH</span>
             </p>
           </div>
         </div>
@@ -82,9 +95,9 @@ export const PayForTicketPage = () => {
       <div className="checkout__bottom">
         <div>
           <p>Всего к оплате</p>
-          <p>0.0 UAH</p>
+          <p>{ticketsQuantity * 8}.0 UAH</p>
         </div>
-        <Button>Оплатить</Button>
+        <Button>Оплатить {ticketsQuantity * 8}.0 UAH</Button>
       </div>
     </div>
   );
