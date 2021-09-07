@@ -27,6 +27,7 @@
     "react-swipeable": "^6.2.0",
     "react-webcam": "^6.0.0",
     "typescript": "^4.4.2",
+    "use-long-press": "^1.1.1",
     "web-vitals": "^1.1.2"
   },
   "scripts": {

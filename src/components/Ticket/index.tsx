@@ -5,6 +5,7 @@ import vtk from "../../images/vtk.png";
 import Timer from "../Timer";
 import moment from "moment";
 import { useSwipeable } from "react-swipeable";
+import { useLongPress } from "use-long-press";
 
 type TicketProps = {
   date?: any;
@@ -44,14 +45,14 @@ export const Ticket: FC<TicketProps> = ({
     }
   }, []);
 
-  const handlers = useSwipeable({
-    onSwipedLeft: (e: any) => setActiveTicket(date),
+  const bind = useLongPress(() => {
+    setActiveTicket(date);
   });
 
   return (
     <>
       {!!minutes && (
-        <div className="ticket" {...handlers}>
+        <div className="ticket" {...bind}>
           <div className="ticket__top">
             <div className="ticket__top_left">
               <img src={vtk} alt="logo" />
