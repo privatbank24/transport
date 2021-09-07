@@ -3,6 +3,60 @@
 .ticket-scanner{
    background: $main-dark-1;
 
+   &__frame{
+      position: absolute;
+      z-index: 10000;
+      top: 50%;
+      left: 50%;
+      flex-flow: row wrap;
+      width: 70vw;
+      height: 70vw;
+      transform: translate(-50%, -50%);
+
+      div{
+         position: absolute;
+         width: 15vw;
+         height: 15vw;
+         border: 5px solid white;
+         border-radius: 10px;
+
+         &:nth-of-type(1){
+            top: 0;
+            left: 0;
+            border-top-right-radius: 0;
+            border-bottom-left-radius: 0;
+            border-right: none;
+            border-bottom: none;
+         }
+
+         &:nth-of-type(2){
+            top: 0;
+            right: 0;
+            border-top-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border-left: none;
+            border-bottom: none;
+         }
+
+         &:nth-of-type(3){
+            bottom: 0;
+            right: 0;
+            border-bottom-left-radius: 0;
+            border-top-right-radius: 0;
+            border-top: none;
+            border-left: none;
+         }
+
+         &:nth-of-type(4){
+            bottom: 0;
+            left: 0;
+            border-top-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border-top: none;
+            border-right: none;
+         }
+      }
+   }
 
    &__top{
       position: absolute;

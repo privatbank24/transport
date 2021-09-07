@@ -1,5 +1,5 @@
 import { Fade, IconButton, Modal } from "@material-ui/core";
-import React, { FC } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import QrReader from "react-qr-reader";
 import "./index.scss";
 import ClearIcon from "@material-ui/icons/Clear";
@@ -14,6 +14,10 @@ export const TicketScanner: FC<TicketScannerProps> = ({
   open,
   setOpen,
 }: TicketScannerProps) => {
+  const qrReader = useRef<any>(null);
+  const [isLegacyModeActivated, setIsLegacyModeActivated] =
+    useState<boolean>(false);
+
   const handleScan = (data: any) => {
     console.log(data);
     if (data) {
@@ -24,6 +28,20 @@ export const TicketScanner: FC<TicketScannerProps> = ({
   const handleError = (err: any) => {
     console.error(err);
   };
+
+  const openImageDialog = () => {
+    if (qrReader && qrReader.current) {
+      qrReader.current.openImageDialog();
+    }
+  };
+
+  useEffect(() => {
+    if (isLegacyModeActivated) openImageDialog();
+  }, [isLegacyModeActivated]);
+
+  useEffect(() => {
+    setIsLegacyModeActivated(false);
+  }, [open]);
 
   return (
     <Modal open={open} className="ticket-scanner">
@@ -37,12 +55,24 @@ export const TicketScanner: FC<TicketScannerProps> = ({
             </div>
             <p>Сканер</p>
             <div>
-              <IconButton>
+              <IconButton onClick={() => setIsLegacyModeActivated(true)}>
                 <CropOriginalIcon />
               </IconButton>
             </div>
           </div>
-          <QrReader delay={500} onError={handleError} onScan={handleScan} />
+          <div className="ticket-scanner__frame">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <QrReader
+            ref={qrReader}
+            delay={500}
+            onError={handleError}
+            onScan={handleScan}
+            legacyMode={isLegacyModeActivated}
+          />
         </div>
       </Fade>
     </Modal>
