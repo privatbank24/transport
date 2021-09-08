@@ -1,8 +1,10 @@
 import { Button, Fade, Modal } from "@material-ui/core";
 import React, { FC, useState } from "react";
+import { sendCode } from "../../actions/authentication";
 import "./index.scss";
 
 type FirtsTimeQRModalProps = {
+  setVagonNumber: (value: string) => void;
   open: boolean;
   setOpen: (value: boolean) => void;
 };
@@ -10,6 +12,7 @@ type FirtsTimeQRModalProps = {
 export const FirtsTimeQRModal: FC<FirtsTimeQRModalProps> = ({
   open,
   setOpen,
+  setVagonNumber,
 }: FirtsTimeQRModalProps) => {
   const [number, setNumber] = useState<string>("");
   const [isSendClicked, setIsSendClicked] = useState<boolean>(false);
@@ -36,7 +39,18 @@ export const FirtsTimeQRModal: FC<FirtsTimeQRModalProps> = ({
             }}
             placeholder="Номер"
           />
-          <Button onClick={() => setIsSendClicked(true)}>Отправить</Button>
+          <Button
+            onClick={async () => {
+              if (localStorage.getItem("currentQR")) {
+                setIsSendClicked(true);
+                await sendCode(localStorage.getItem("currentQR"), number);
+                setVagonNumber(number);
+                setOpen(false);
+              }
+            }}
+          >
+            Отправить
+          </Button>
         </div>
       </Fade>
     </Modal>

@@ -24,6 +24,7 @@ export const TicketScanner: FC<TicketScannerProps> = ({
   const handleScan = (data: any) => {
     console.log(data);
     if (data) {
+      localStorage.setItem("currentQR", data);
       setOpen(false);
       history.push(ROUTES.PAY_FOR_TICKET);
     }

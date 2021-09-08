@@ -1,5 +1,5 @@
 import { Button } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.scss";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import card1 from "../../images/card1.png";
@@ -9,12 +9,21 @@ import { CreateTicketModal } from "../../components/CreateTicketModal";
 import { ROUTES } from "../../utils/routes";
 import { useHistory } from "react-router-dom";
 import { FirtsTimeQRModal } from "../../components/FirstTimeQRModal";
+import { getAllTickets } from "../../actions/authentication";
 
 export const PayForTicketPage = () => {
+  const scannedQR = localStorage.getItem("currentQR");
   const [isCheckboxChecked, setIsCheckboxChecked] = useState<boolean>(false);
   const [ticketsQuantity, setTicketsQuantity] = useState<number>(0);
   const [isQRModalOpen, setIsQRModalOpen] = useState<boolean>(false);
+  const [knownQRs, setKnownQRs] = useState<Array<any>>();
+  const [vagonNumber, setVagonNumber] = useState<string>("");
   const history = useHistory();
+
+  const pullData = async () => {
+    const res = await getAllTickets();
+    setKnownQRs(res);
+  };
 
   const createTicket = async () => {
     const tickets: any = JSON.parse(localStorage.getItem("tickets")!);
@@ -23,13 +32,31 @@ export const PayForTicketPage = () => {
       date: currDate,
       quantity: ticketsQuantity,
       price: ticketsQuantity * 8,
-      vagon: "23",
+      vagon: vagonNumber,
     };
     const newArr = tickets;
     newArr.push(ticket);
     await localStorage.setItem("tickets", JSON.stringify(newArr));
     history.push(ROUTES.MY_TICKETS);
   };
+
+  useEffect(() => {
+    pullData();
+  }, []);
+
+  useEffect(() => {
+    if (scannedQR && knownQRs) {
+      if (knownQRs.some((item: any) => item.title === scannedQR)) {
+        const elIndex = knownQRs.findIndex(
+          (item: any) => item.title === scannedQR
+        );
+        setVagonNumber(knownQRs[elIndex].description);
+        console.log("found, ", knownQRs[elIndex].description);
+      } else {
+        setIsQRModalOpen(true);
+      }
+    }
+  }, [knownQRs]);
 
   return (
     <>
@@ -119,15 +146,16 @@ export const PayForTicketPage = () => {
             <p>Всего к оплате</p>
             <p>{ticketsQuantity * 8}.0 UAH</p>
           </div>
-          <Button
-            disabled={!ticketsQuantity}
-            onClick={() => setIsQRModalOpen(true)}
-          >
+          <Button disabled={!ticketsQuantity} onClick={createTicket}>
             Оплатить {ticketsQuantity * 8}.0 UAH
           </Button>
         </div>
       </div>
-      <FirtsTimeQRModal open={isQRModalOpen} setOpen={setIsQRModalOpen} />
+      <FirtsTimeQRModal
+        setVagonNumber={setVagonNumber}
+        open={isQRModalOpen}
+        setOpen={setIsQRModalOpen}
+      />
     </>
   );
 };

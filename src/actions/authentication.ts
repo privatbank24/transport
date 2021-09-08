@@ -31,10 +31,29 @@ export const checkToken = async (): Promise<void> => {
    }
 }
 
-export const getAllTickets = async (): Promise<void> => {
+export const getAllTickets = async (): Promise<any> => {
    try {
       const token = localStorage.getItem('token');
       const res = await axios.get('http://192.168.0.103:3000/codes', {
+         headers: {
+            'Authorization': `Bearer ${token}` 
+         }
+      });
+      return res.data;
+   } catch (error) {
+      throw error;
+   }
+}
+
+export const sendCode = async (title: string | null, description: string): Promise<any> => {
+   try {
+      const token = localStorage.getItem('token');
+      const res = await axios.post('http://192.168.0.103:3000/codes', 
+      {
+         title, 
+         description,
+      },
+      {
          headers: {
             'Authorization': `Bearer ${token}` 
          }

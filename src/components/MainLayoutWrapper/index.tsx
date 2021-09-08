@@ -7,7 +7,6 @@ import { LogoutModal } from "../LogoutModal";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { useHistory, useLocation } from "react-router-dom";
 import { ROUTES } from "../../utils/routes";
-import { getAllTickets } from "../../actions/authentication";
 
 export const MainLayoutWrapper = ({ children }: any) => {
   const history = useHistory();
@@ -72,8 +71,7 @@ export const MainLayoutWrapper = ({ children }: any) => {
             <div className="main-layout__navigation_bottom">
               <Button
                 onClick={() => {
-                  // history.push(ROUTES.MY_TICKETS);
-                  getAllTickets();
+                  history.push(ROUTES.MY_TICKETS);
                 }}
                 className={activeButton === 1 ? "active" : "disabled"}
               >
