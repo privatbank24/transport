@@ -13,7 +13,7 @@ export const MyTravelCards = () => {
   return (
     <div className="my-tickets">
       <div className="my-tickets__container">
-        <h1>Нет активных проезных</h1>
+        <h1>Нет активных проездных</h1>
       </div>
       <Button>Отсканировать QR-код</Button>
     </div>
