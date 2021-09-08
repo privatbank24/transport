@@ -16,7 +16,10 @@ export const SignIn = () => {
       await signIn(username, password);
       history.push(ROUTES.MY_TICKETS);
     } catch (error: any) {
-      if (error.message.slice(-3) === "400") {
+      if (
+        error.message.slice(-3) === "400" ||
+        error.message.slice(-3) === "401"
+      ) {
         setWrongCredentials(true);
       }
     }

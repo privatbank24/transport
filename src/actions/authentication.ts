@@ -20,7 +20,7 @@ export const checkToken = async (): Promise<void> => {
    if (history.location.pathname !== ROUTES.LOGIN) {
       try {
          const token = localStorage.getItem('token');
-         await axios.get('http://192.168.0.103:3000/tasks', {
+         await axios.get('http://192.168.0.103:3000/categories', {
             headers: { 'Authorization': `Bearer ${token}`}
          });
       } catch (error: any) {
@@ -28,5 +28,19 @@ export const checkToken = async (): Promise<void> => {
          window.location.href = 'http://192.168.0.103:3001/';
          throw error;
       }
+   }
+}
+
+export const getAllTickets = async (): Promise<void> => {
+   try {
+      const token = localStorage.getItem('token');
+      const res = await axios.get('http://192.168.0.103:3000/codes', {
+         headers: {
+            'Authorization': `Bearer ${token}` 
+         }
+      });
+      return res.data;
+   } catch (error) {
+      throw error;
    }
 }

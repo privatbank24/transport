@@ -16,7 +16,7 @@ export const App: FC = () => {
   useEffect(() => {
     setInterval(() => {
       checkToken();
-    }, 5000);
+    }, 30000);
   }, []);
 
   useEffect(() => {

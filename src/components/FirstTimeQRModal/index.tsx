@@ -36,10 +36,7 @@ export const FirtsTimeQRModal: FC<FirtsTimeQRModalProps> = ({
             }}
             placeholder="Номер"
           />
-          <div>
-            <Button onClick={() => setOpen(false)}>Не отправлять</Button>
-            <Button onClick={() => setIsSendClicked(true)}>Отправить</Button>
-          </div>
+          <Button onClick={() => setIsSendClicked(true)}>Отправить</Button>
         </div>
       </Fade>
     </Modal>
