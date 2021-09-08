@@ -9,11 +9,13 @@ import { checkToken } from "./actions/authentication";
 import { MainLayoutWrapper } from "./components/MainLayoutWrapper";
 import { MyTravelCards } from "./pages/MyTravelCards";
 import { PayForTicketPage } from "./pages/PayForTicketPage";
+import { generateCards } from "./actions/generateCards";
 
 export const App: FC = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
 
   useEffect(() => {
+    generateCards();
     setInterval(() => {
       checkToken();
     }, 30000);

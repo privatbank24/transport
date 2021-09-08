@@ -2,7 +2,6 @@ import { Button } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import "./index.scss";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import card1 from "../../images/card1.png";
 import { CustomCheckbox } from "../../components/CustomCheckbox";
 import cx from "classnames";
 import { CreateTicketModal } from "../../components/CreateTicketModal";
@@ -10,9 +9,11 @@ import { ROUTES } from "../../utils/routes";
 import { useHistory } from "react-router-dom";
 import { FirtsTimeQRModal } from "../../components/FirstTimeQRModal";
 import { getAllTickets } from "../../actions/authentication";
+import { CardImageSwitch } from "../../components/CardImageSwitch";
 
 export const PayForTicketPage = () => {
   const scannedQR = localStorage.getItem("currentQR");
+  const userCards = JSON.parse(localStorage.getItem("userCards")!);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState<boolean>(false);
   const [ticketsQuantity, setTicketsQuantity] = useState<number>(0);
   const [isQRModalOpen, setIsQRModalOpen] = useState<boolean>(false);
@@ -74,23 +75,31 @@ export const PayForTicketPage = () => {
               <div className="checkout__main_wrapper">
                 <div className="checkout__main_options">
                   <div className="checkout__main_options_left">
-                    <img src={card1} alt="card" />
+                    <img
+                      src={CardImageSwitch(userCards[0].cardImageIndex)}
+                      alt="card"
+                    />
                   </div>
                   <div className="checkout__main_options_right">
-                    <p>*5160 Карта универсальная</p>
                     <p>
-                      <span>260.43 UAH</span>
+                      *{userCards[0].cardNumber.slice(-4)} Карта универсальная
+                    </p>
+                    <p>
+                      <span>{userCards[0].balance} UAH</span>
                     </p>
                   </div>
                 </div>
                 <div className="checkout__main_options">
                   <div className="checkout__main_options_left">
-                    <img src={card1} alt="card" />
+                    <img
+                      src={CardImageSwitch(userCards[1].cardImageIndex)}
+                      alt="card"
+                    />
                   </div>
                   <div className="checkout__main_options_right">
-                    <p>*5160 Карта универсальная</p>
+                    <p>*{userCards[1].cardNumber.slice(-4)} Карта для выплат</p>
                     <p>
-                      <span>260.43 UAH</span>
+                      <span>{userCards[1].balance} UAH</span>
                     </p>
                   </div>
                 </div>
