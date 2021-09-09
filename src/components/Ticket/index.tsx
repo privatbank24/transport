@@ -3,8 +3,7 @@ import "./index.scss";
 import { TransportAnimation } from "../TransportAnimation";
 import vtk from "../../images/vtk.png";
 import Timer from "../Timer";
-import moment from "moment";
-import { useSwipeable } from "react-swipeable";
+import cx from "classnames";
 import { useLongPress } from "use-long-press";
 
 type TicketProps = {
@@ -24,6 +23,7 @@ export const Ticket: FC<TicketProps> = ({
 }: TicketProps) => {
   const [minutes, setMinutes] = useState<number | null>(null);
   const [seconds, setSeconds] = useState<number | null>(null);
+  const [isExpired, setIsExpired] = useState(false);
 
   useEffect(() => {
     const currentDate = new Date().getTime();
@@ -52,7 +52,12 @@ export const Ticket: FC<TicketProps> = ({
   return (
     <>
       {!!minutes && (
-        <div className="ticket" {...bind}>
+        <div
+          className={cx("ticket", {
+            expired: isExpired,
+          })}
+          {...bind}
+        >
           <div className="ticket__top">
             <div className="ticket__top_left">
               <img src={vtk} alt="logo" />
@@ -66,7 +71,7 @@ export const Ticket: FC<TicketProps> = ({
             </div>
           </div>
           <div className="ticket__main">
-            <TransportAnimation vagon={vagon} />
+            <TransportAnimation expired={isExpired} vagon={vagon} />
             <div className="ticket__main_right">
               <div>
                 <h2>Дата</h2>
@@ -94,12 +99,18 @@ export const Ticket: FC<TicketProps> = ({
               </div>
             </div>
           </div>
-          <div className="ticket__bottom">
-            <h2>Билет разового использования</h2>
-            {!!minutes && !!seconds && (
-              <Timer initialMinute={minutes} initialSeconds={seconds} />
-            )}
-          </div>
+          {minutes > 0 && (
+            <div className="ticket__bottom">
+              <h2>Билет разового использования</h2>
+              {!!minutes && !!seconds && (
+                <Timer
+                  initialMinute={minutes}
+                  initialSeconds={seconds}
+                  setIsExpired={setIsExpired}
+                />
+              )}
+            </div>
+          )}
         </div>
       )}
     </>

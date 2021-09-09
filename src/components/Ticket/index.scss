@@ -11,6 +11,26 @@
    border-radius: 10px;
    margin: 10px 0;
 
+   &.expired{
+      h2{
+         color: $expired-headings-grey;
+      }
+
+      p{
+         color: $expired-stats-grey;
+      }
+
+      .ticket__top_right{
+         p{
+            color: $expired-headings-grey;
+
+            span{
+               color: $expired-stats-grey;
+            }
+         }
+      }
+   }
+
    &__top{
       display: flex;
 

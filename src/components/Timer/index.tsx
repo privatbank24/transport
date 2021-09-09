@@ -1,17 +1,27 @@
-import React from "react";
+import React, { FC } from "react";
 import { useState, useEffect } from "react";
 
-const Timer = (props: any) => {
-  const { initialMinute = 0, initialSeconds = 0 } = props;
-  const [minutes, setMinutes] = useState(initialMinute);
-  const [seconds, setSeconds] = useState(initialSeconds);
+interface TimerProps {
+  initialMinute: number;
+  initialSeconds: number;
+  setIsExpired: (value: boolean) => void;
+}
+
+const Timer: FC<TimerProps> = ({
+  initialMinute,
+  initialSeconds,
+  setIsExpired,
+}: TimerProps) => {
+  const [minutes, setMinutes] = useState<number>(initialMinute);
+  const [seconds, setSeconds] = useState<number>(initialSeconds);
+
   useEffect(() => {
     let myInterval = setInterval(() => {
       if (seconds > 0) {
         setSeconds(seconds - 1);
       }
-      if (seconds === 0) {
-        if (minutes === 0) {
+      if (seconds <= 0) {
+        if (minutes < 0) {
           clearInterval(myInterval);
         } else {
           setMinutes(minutes - 1);
@@ -23,6 +33,12 @@ const Timer = (props: any) => {
       clearInterval(myInterval);
     };
   });
+
+  useEffect(() => {
+    if (minutes < 0) {
+      setIsExpired(true);
+    }
+  }, [minutes, seconds]);
 
   return (
     <>
