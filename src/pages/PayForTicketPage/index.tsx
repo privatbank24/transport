@@ -4,12 +4,10 @@ import "./index.scss";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import { CustomCheckbox } from "../../components/CustomCheckbox";
 import cx from "classnames";
-import { CreateTicketModal } from "../../components/CreateTicketModal";
 import { ROUTES } from "../../utils/routes";
 import { useHistory } from "react-router-dom";
 import { FirtsTimeQRModal } from "../../components/FirstTimeQRModal";
 import { getAllTickets } from "../../actions/authentication";
-import { CardImageSwitch } from "../../components/CardImageSwitch";
 
 export const PayForTicketPage = () => {
   const scannedQR = localStorage.getItem("currentQR");
@@ -52,7 +50,6 @@ export const PayForTicketPage = () => {
           (item: any) => item.title === scannedQR
         );
         setVagonNumber(knownQRs[elIndex].description);
-        console.log("found, ", knownQRs[elIndex].description);
       } else {
         setIsQRModalOpen(true);
       }
@@ -76,7 +73,7 @@ export const PayForTicketPage = () => {
                 <div className="checkout__main_options">
                   <div className="checkout__main_options_left">
                     <img
-                      src={CardImageSwitch(userCards[0].cardImageIndex)}
+                      src={`/cards/card (${userCards[0].cardImageIndex}).jpg`}
                       alt="card"
                     />
                   </div>
@@ -92,7 +89,7 @@ export const PayForTicketPage = () => {
                 <div className="checkout__main_options">
                   <div className="checkout__main_options_left">
                     <img
-                      src={CardImageSwitch(userCards[1].cardImageIndex)}
+                      src={`/cards/card (${userCards[1].cardImageIndex}).jpg`}
                       alt="card"
                     />
                   </div>
