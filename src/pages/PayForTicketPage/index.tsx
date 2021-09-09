@@ -9,6 +9,8 @@ import { useHistory } from "react-router-dom";
 import { FirtsTimeQRModal } from "../../components/FirstTimeQRModal";
 import { getAllTickets } from "../../actions/authentication";
 import { LoaderLogo } from "../../components/LoaderLogo";
+import { toast } from "react-toastify";
+import CheckRoundedIcon from "@material-ui/icons/CheckRounded";
 
 export const PayForTicketPage = () => {
   const scannedQR = localStorage.getItem("currentQR");
@@ -20,6 +22,23 @@ export const PayForTicketPage = () => {
   const [knownQRs, setKnownQRs] = useState<Array<any>>();
   const [vagonNumber, setVagonNumber] = useState<string>("");
   const history = useHistory();
+
+  const notify = () =>
+    toast.success(() => (
+      <div className="toast__success-purchase">
+        <div>
+          <CheckRoundedIcon />
+        </div>
+        <div>
+          <h3>Оплата успешна</h3>
+          <p>
+            Ваши билеты доступны вам в сервисе
+            <br />
+            "Городской транспорт"
+          </p>
+        </div>
+      </div>
+    ));
 
   const pullData = async () => {
     const res = await getAllTickets();
@@ -43,6 +62,7 @@ export const PayForTicketPage = () => {
       newArr.push(ticket);
       localStorage.setItem("tickets", JSON.stringify(newArr));
       history.push(ROUTES.MY_TICKETS);
+      notify();
     }, 2000);
   };
 

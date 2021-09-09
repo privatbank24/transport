@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import "./index.scss";
+import "./scss/index.scss";
 import { MyTickets } from "./pages/MyTickets";
 import { SignIn } from "./pages/SignIn";
 import { ROUTES } from "./utils/routes";
@@ -10,6 +10,10 @@ import { MainLayoutWrapper } from "./components/MainLayoutWrapper";
 import { MyTravelCards } from "./pages/MyTravelCards";
 import { PayForTicketPage } from "./pages/PayForTicketPage";
 import { generateCards } from "./actions/generateCards";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Slide } from "react-toastify";
+import "./scss/toaster.scss";
 
 export const App: FC = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -28,6 +32,17 @@ export const App: FC = () => {
   return (
     <Router>
       <div className="App">
+        <ToastContainer
+          icon={false}
+          closeButton={false}
+          position="top-center"
+          autoClose={5000}
+          closeOnClick={false}
+          hideProgressBar={true}
+          pauseOnFocusLoss={false}
+          draggable={false}
+          transition={Slide}
+        />
         <Switch>
           <Route exact path={ROUTES.LOGIN}>
             <SignIn />
