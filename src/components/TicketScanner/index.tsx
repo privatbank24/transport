@@ -7,6 +7,7 @@ import CropOriginalIcon from "@material-ui/icons/CropOriginal";
 import { ROUTES } from "../../utils/routes";
 import { useHistory } from "react-router-dom";
 import { ErrorModal } from "../ErrorModal";
+import { LoaderLogo } from "../LoaderLogo";
 
 interface TicketScannerProps {
   open: boolean;
@@ -18,6 +19,7 @@ export const TicketScanner: FC<TicketScannerProps> = ({
   setOpen,
 }: TicketScannerProps) => {
   const [isError, setIsError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const history = useHistory();
   const qrReader = useRef<any>(null);
   const [isLegacyModeActivated, setIsLegacyModeActivated] =
@@ -25,18 +27,24 @@ export const TicketScanner: FC<TicketScannerProps> = ({
 
   const handleScan = (data: any) => {
     if (data) {
-      if (
-        !data.includes("htt") &&
-        !data.includes("com") &&
-        !data.includes("ua")
-      ) {
-        localStorage.setItem("currentQR", data);
-        setOpen(false);
-        history.push(ROUTES.PAY_FOR_TICKET);
-      } else {
-        setOpen(false);
-        setIsError(true);
-      }
+      setIsLoading(true);
+
+      setTimeout(() => {
+        if (
+          !data.includes("htt") &&
+          !data.includes("com") &&
+          !data.includes("ua")
+        ) {
+          localStorage.setItem("currentQR", data);
+          setIsLoading(false);
+          setOpen(false);
+          history.push(ROUTES.PAY_FOR_TICKET);
+        } else {
+          setIsLoading(false);
+          setOpen(false);
+          setIsError(true);
+        }
+      }, 2000);
     }
   };
 
@@ -97,6 +105,7 @@ export const TicketScanner: FC<TicketScannerProps> = ({
         open={isError}
         setOpen={setIsError}
       />
+      <LoaderLogo open={isLoading} />
     </>
   );
 };

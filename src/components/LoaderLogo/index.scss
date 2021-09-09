@@ -1,0 +1,48 @@
+@import '/src/variables.scss';
+
+.loader-logo{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   svg{
+      width: 30vw;
+
+      path{
+         stroke: $main-grey-1;
+      }
+   }
+
+   #eUmi8O57BvC1{
+      position: absolute;
+      z-index: 2;
+   }
+
+   #anim{
+      position: relative;
+      z-index: 10000;
+      
+      path{
+         &.main{
+            animation: loading 2s infinite;
+         }
+
+         &.sub{
+            animation: loading 2s infinite;
+            animation-delay: 1s;
+         }
+      }
+   }
+}
+
+@keyframes loading {
+   0%{
+      stroke: $main-grey-1;
+   }
+   50%{
+      stroke: $main-green-1;
+   }
+   100%{
+      stroke: $main-grey-1;
+   }
+}
