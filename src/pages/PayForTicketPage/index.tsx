@@ -8,9 +8,11 @@ import { ROUTES } from "../../utils/routes";
 import { useHistory } from "react-router-dom";
 import { FirtsTimeQRModal } from "../../components/FirstTimeQRModal";
 import { getAllTickets } from "../../actions/authentication";
+import { LoaderLogo } from "../../components/LoaderLogo";
 
 export const PayForTicketPage = () => {
   const scannedQR = localStorage.getItem("currentQR");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const userCards = JSON.parse(localStorage.getItem("userCards")!);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState<boolean>(false);
   const [ticketsQuantity, setTicketsQuantity] = useState<number>(0);
@@ -25,18 +27,23 @@ export const PayForTicketPage = () => {
   };
 
   const createTicket = async () => {
-    const tickets: any = JSON.parse(localStorage.getItem("tickets")!);
-    const currDate = new Date();
-    let ticket = {
-      date: currDate,
-      quantity: ticketsQuantity,
-      price: ticketsQuantity * 8,
-      vagon: vagonNumber,
-    };
-    const newArr = tickets;
-    newArr.push(ticket);
-    await localStorage.setItem("tickets", JSON.stringify(newArr));
-    history.push(ROUTES.MY_TICKETS);
+    setIsLoading(true);
+
+    setTimeout(() => {
+      setIsLoading(false);
+      const tickets: any = JSON.parse(localStorage.getItem("tickets")!);
+      const currDate = new Date();
+      let ticket = {
+        date: currDate,
+        quantity: ticketsQuantity,
+        price: 8,
+        vagon: vagonNumber,
+      };
+      const newArr = tickets;
+      newArr.push(ticket);
+      localStorage.setItem("tickets", JSON.stringify(newArr));
+      history.push(ROUTES.MY_TICKETS);
+    }, 2000);
   };
 
   useEffect(() => {
@@ -162,6 +169,7 @@ export const PayForTicketPage = () => {
         open={isQRModalOpen}
         setOpen={setIsQRModalOpen}
       />
+      <LoaderLogo open={isLoading} text="Определяем способ подтверждения" />
     </>
   );
 };

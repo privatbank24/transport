@@ -5,6 +5,18 @@
    align-items: center;
    justify-content: center;
 
+   div{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      p{
+         margin-top: 15px;
+         font-size: 14px;
+      }
+   }
+
    svg{
       width: 30vw;
 

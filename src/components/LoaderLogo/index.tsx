@@ -1,9 +1,17 @@
-import React from "react";
+import React, { FC } from "react";
 import { Fade, Modal } from "@material-ui/core";
 import { ReactComponent as MainLogo } from "../../images/logo.svg";
 import "./index.scss";
 
-export const LoaderLogo = ({ open }: { open: boolean }) => {
+interface LoaderLogoProps {
+  open: boolean;
+  text?: string;
+}
+
+export const LoaderLogo: FC<LoaderLogoProps> = ({
+  open,
+  text,
+}: LoaderLogoProps) => {
   return (
     <Modal className="loader-logo" open={open}>
       <Fade in={open}>
@@ -110,6 +118,7 @@ export const LoaderLogo = ({ open }: { open: boolean }) => {
               transform="matrix(0, 1, -1, 0, 364.390999, -35.890999)"
             />
           </svg>
+          {text && <p>{text}</p>}
         </div>
       </Fade>
     </Modal>
