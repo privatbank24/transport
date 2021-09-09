@@ -14,6 +14,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Slide } from "react-toastify";
 import "./scss/toaster.scss";
+import { HomePage } from "./pages/HomePage";
 
 export const App: FC = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -50,6 +51,9 @@ export const App: FC = () => {
           <MainLayoutWrapper>
             <Route exact path={ROUTES.MY_TICKETS}>
               <MyTickets />
+            </Route>
+            <Route exact path={ROUTES.DASHBOARD}>
+              <HomePage />
             </Route>
             <Route exact path={ROUTES.MY_TRAVEL_CARDS}>
               <MyTravelCards />
