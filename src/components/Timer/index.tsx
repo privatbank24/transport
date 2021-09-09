@@ -28,7 +28,8 @@ const Timer = (props: any) => {
     <>
       {minutes === 0 && seconds === 0 ? null : (
         <p>
-          00:{minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+          00:{minutes < 10 ? `0${minutes}` : minutes}:
+          {seconds < 10 ? `0${seconds}` : seconds}
         </p>
       )}
     </>
