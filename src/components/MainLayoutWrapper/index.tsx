@@ -64,7 +64,8 @@ export const MainLayoutWrapper = ({ children }: any) => {
         <div className="main-layout__navigation">
           <div className="main-layout__navigation_top">
             {window.location.pathname === ROUTES.MY_TICKETS ||
-            window.location.pathname === ROUTES.MY_TRAVEL_CARDS ? (
+            window.location.pathname === ROUTES.MY_TRAVEL_CARDS ||
+            window.location.pathname === ROUTES.PAY_FOR_TICKET ? (
               <>
                 <IconButton
                   className="back"
@@ -139,7 +140,7 @@ export const MainLayoutWrapper = ({ children }: any) => {
           setTimeout(() => {
             setIsNavbarOpened(false);
             localStorage.clear();
-            window.location.href = "http://192.168.0.103:3001/";
+            window.location.href = "http://localhost:3001/";
           }, 300);
         }}
       />

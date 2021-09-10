@@ -10,6 +10,7 @@ export const signIn = async (username: string, password: string): Promise<void> 
       })
       if (res.data.accessToken) { 
          await localStorage.setItem('token', res.data.accessToken);
+         await localStorage.setItem('isLoadingModalShown', JSON.stringify(true));
       }  
    } catch (error) {
       throw error;

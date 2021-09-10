@@ -105,7 +105,7 @@ export const TicketScanner: FC<TicketScannerProps> = ({
         open={isError}
         setOpen={setIsError}
       />
-      <LoaderLogo open={isLoading} />
+      <LoaderLogo qr={true} open={isLoading} />
     </>
   );
 };
