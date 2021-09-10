@@ -17,7 +17,7 @@ import "./scss/toaster.scss";
 import { HomePage } from "./pages/HomePage";
 
 export const App: FC = () => {
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token] = useState(localStorage.getItem("token"));
 
   useEffect(() => {
     generateCards();

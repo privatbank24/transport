@@ -14,7 +14,7 @@ export const SignIn = () => {
   const onSubmit = async () => {
     try {
       await signIn(username, password);
-      history.push(ROUTES.MY_TICKETS);
+      history.push(ROUTES.DASHBOARD);
     } catch (error: any) {
       if (
         error.message.slice(-3) === "400" ||
