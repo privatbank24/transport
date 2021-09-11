@@ -111,9 +111,7 @@ export const MainLayoutWrapper = ({ children }: any) => {
         >
           <Button onClick={() => setIsLogoutModalOpened(true)}>Log out</Button>
         </div>
-        <div {...mainHandlers} className="main-layout__container">
-          {children}
-        </div>
+        <div className="main-layout__container">{children}</div>
       </div>
       <LogoutModal
         open={isLogoutModalOpened}

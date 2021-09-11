@@ -1,4 +1,4 @@
-import { Fade, IconButton } from "@material-ui/core";
+import { Button, Fade, IconButton } from "@material-ui/core";
 import { Fragment, useEffect, useState } from "react";
 import PersonIcon from "@material-ui/icons/Person";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
@@ -11,6 +11,13 @@ import { Card } from "../../components/Card";
 import { generateCards } from "../../actions/generateCards";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
+import { useSwipeable } from "react-swipeable";
+import cx from "classnames";
+import PhoneIphoneSharpIcon from "@material-ui/icons/PhoneIphoneSharp";
+import PaymentOutlinedIcon from "@material-ui/icons/PaymentOutlined";
+import AddRoundedIcon from "@material-ui/icons/AddRounded";
+import { ReactComponent as Hryvnia } from "../../images/hryvnia.svg";
+import TouchRipple from "@material-ui/core/ButtonBase/TouchRipple.js";
 
 export const HomePage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -19,6 +26,12 @@ export const HomePage = () => {
   );
   const userCards = JSON.parse(localStorage.getItem("userCards")!);
   const [activeCardIndex, setActiveCardIndex] = useState<number>(0);
+  const [areOptionsShown, setAreOptionsShown] = useState<boolean>(false);
+
+  const handlers = useSwipeable({
+    onSwipedUp: (e: any) => setAreOptionsShown(true),
+    onSwipedDown: (e: any) => setAreOptionsShown(false),
+  });
 
   useEffect(() => {
     if (!userCards) {
@@ -69,6 +82,7 @@ export const HomePage = () => {
             {!!userCards && (
               <div className="dashboard__main_cards">
                 <Carousel
+                  interval={100000000}
                   autoPlay={false}
                   showArrows={false}
                   showStatus={false}
@@ -99,7 +113,42 @@ export const HomePage = () => {
               <span className={activeCardIndex === 1 ? "active" : ""} />
             </div>
           </div>
-          <div className="dashboard__bottom">bottom</div>
+          <div
+            className={cx("dashboard__bottom", {
+              open: areOptionsShown,
+            })}
+            {...handlers}
+          >
+            <div className="dashboard__bottom_line" />
+            <div className="dashboard__bottom_options">
+              <div>
+                <Button>
+                  <PhoneIphoneSharpIcon />
+                </Button>
+                <p>Пополнение мобильного</p>
+              </div>
+              <div>
+                <Button>
+                  <PaymentOutlinedIcon />
+                </Button>
+                <p>
+                  Перевод <br /> на карту
+                </p>
+              </div>
+              <div>
+                <Button>
+                  <Hryvnia />
+                </Button>
+                <p>Платежи</p>
+              </div>
+              <div>
+                <Button>
+                  <AddRoundedIcon />
+                </Button>
+                <p>Добавить</p>
+              </div>
+            </div>
+          </div>
         </div>
       </Fade>
       <LoaderLogo open={isStartModalShown || isLoading} login={true} />
