@@ -9,7 +9,6 @@ import { checkToken } from "./actions/authentication";
 import { MainLayoutWrapper } from "./components/MainLayoutWrapper";
 import { MyTravelCards } from "./pages/MyTravelCards";
 import { PayForTicketPage } from "./pages/PayForTicketPage";
-import { generateCards } from "./actions/generateCards";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Slide } from "react-toastify";
@@ -20,7 +19,6 @@ export const App: FC = () => {
   const [token] = useState(localStorage.getItem("token"));
 
   useEffect(() => {
-    generateCards();
     setInterval(() => {
       checkToken();
     }, 30000);

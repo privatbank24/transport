@@ -1,0 +1,108 @@
+@import '/src/scss/variables.scss';
+
+.dashboard{
+   margin-top: -100px;
+
+   &__top{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 15px 7px 10px;  
+      border-bottom: 1px solid $main-grey-2;
+
+      &_section{
+         width: 75px;
+
+         button{
+            width: 30px;
+            height: 30px;
+            padding: 5px;
+
+            &.account{
+               background: $expired-transport-grey;
+
+               svg{
+                  fill: $main-grey-1;
+               }
+            }
+
+            &.likes{
+               margin-right: 15px;
+
+               svg{
+                  transform: scale(1.1);
+                  fill: $main-orange-1;
+               }
+            }
+
+            &.messages{
+               svg{
+                  transform: scale(1.1);
+                  fill: $main-green-2;
+               }
+            }
+         }
+      }
+   }
+
+   &__main{
+      padding: 10px 0;
+
+      &_top{
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         padding: 0 15px;
+         
+         p{
+            font-size: 14px;
+         }
+
+         svg{
+            transform: scale(0.9);   
+         }
+
+         div{
+            display: flex;
+            align-items: center;
+         
+            svg{
+               fill: $main-green-2;
+            }
+
+            p{
+               margin-left: 7px;
+            }
+         }
+      }
+
+      &_cards{
+         margin-top: 10px;
+      }
+
+      &_dots{
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         margin-top: 7px;
+
+         span{
+            margin: 3px;
+            width: 5px;
+            height: 5px;
+            border-radius: 5px;
+            background: $main-grey-2;
+            transition: 0.1s;
+
+            &.active{
+               background: $main-green-2;
+            }
+         }
+      }
+   }
+
+   &__bottom{
+      position: absolute;
+      bottom: 0;
+   }
+}

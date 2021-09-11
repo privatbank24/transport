@@ -13,6 +13,10 @@
          align-items: center;
          border-bottom: 1px solid $main-grey-2;
 
+         &.hidden{
+            display: none;
+         }
+
          .home-section{
             width: 130px;
          }

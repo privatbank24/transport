@@ -1,0 +1,68 @@
+.card-component{
+   border-radius: 15px;
+   height: calc(70vw - 30px);
+   background-size: cover !important;
+   background-repeat: no-repeat !important;
+   margin: 0 15px;
+
+   &:nth-of-type(2){
+      margin-left: 0;
+   }
+
+
+   &__content{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      padding: 15px;
+
+      h2, p{
+         color: white;
+         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.315);
+         text-align: left;
+      }
+
+      &_top{
+         h2{
+            font-size: 22px;
+         }
+         p{
+            margin-top: 8px;
+            font-size: 15px;
+            font-weight: 500;
+         }
+      }
+
+      &_bottom{
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+
+         p{
+            font-size: 24px;
+            font-weight: 700;
+         }
+
+         div{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 20px;
+            padding: 2px;
+            background: white;
+
+            &.mastercard{
+               background: transparent;
+               opacity: 0.8;
+               filter: grayscale(0.1);
+            }
+
+            img{
+               width: 100%;
+            }
+         }
+      }
+   }
+}

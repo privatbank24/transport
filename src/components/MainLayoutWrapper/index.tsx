@@ -7,9 +7,6 @@ import { LogoutModal } from "../LogoutModal";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { useHistory, useLocation } from "react-router-dom";
 import { ROUTES } from "../../utils/routes";
-import PersonIcon from "@material-ui/icons/Person";
-import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
-import ChatBubbleOutlineOutlinedIcon from "@material-ui/icons/ChatBubbleOutlineOutlined";
 
 export const MainLayoutWrapper = ({ children }: any) => {
   const history = useHistory();
@@ -62,7 +59,11 @@ export const MainLayoutWrapper = ({ children }: any) => {
     <>
       <div>
         <div className="main-layout__navigation">
-          <div className="main-layout__navigation_top">
+          <div
+            className={cx("main-layout__navigation_top", {
+              hidden: window.location.pathname === ROUTES.DASHBOARD,
+            })}
+          >
             {window.location.pathname === ROUTES.MY_TICKETS ||
             window.location.pathname === ROUTES.MY_TRAVEL_CARDS ||
             window.location.pathname === ROUTES.PAY_FOR_TICKET ? (
@@ -75,25 +76,6 @@ export const MainLayoutWrapper = ({ children }: any) => {
                 </IconButton>
                 <p className="city-transport">Городской транспорт</p>
                 <div className="plug"></div>
-              </>
-            ) : window.location.pathname === ROUTES.DASHBOARD ? (
-              <>
-                <div className="home-section">
-                  <IconButton className="account">
-                    <PersonIcon />
-                  </IconButton>
-                </div>
-                <p className="money">
-                  <span>$</span> 26.62 <span>/</span> 26.73
-                </p>
-                <div className="home-section">
-                  <IconButton className="likes">
-                    <ThumbUpAltIcon />
-                  </IconButton>
-                  <IconButton className="messages">
-                    <ChatBubbleOutlineOutlinedIcon />
-                  </IconButton>
-                </div>
               </>
             ) : (
               <></>
