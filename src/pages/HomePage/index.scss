@@ -103,7 +103,7 @@
    }
 
    &__bottom{
-      top: 400px;
+      top: calc(48px + 20px + 24px + 20px + 70vw - 30px + 18px);
       position: absolute;
       display: flex;
       flex-direction: column;
@@ -116,6 +116,7 @@
       
       &.open{
          top: 50px;
+         height: calc(100vh - 48px);
       }
 
       &_line{

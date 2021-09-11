@@ -19,6 +19,19 @@ export const App: FC = () => {
   const [token] = useState(localStorage.getItem("token"));
 
   useEffect(() => {
+    const body = document.querySelector("body");
+    if (window.location.pathname === ROUTES.DASHBOARD) {
+      if (body) {
+        body.setAttribute("style", "overflow: hidden");
+      }
+    } else {
+      if (body) {
+        body.setAttribute("style", "overflow: auto");
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     setInterval(() => {
       checkToken();
     }, 30000);

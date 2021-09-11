@@ -1,4 +1,4 @@
-import { Button } from "@material-ui/core";
+import { Button, Fade } from "@material-ui/core";
 import React, { useState, useEffect, Fragment } from "react";
 import { DeleteTicketModal } from "../../components/DeleteTicketModal";
 import { Ticket } from "../../components/Ticket";
@@ -29,32 +29,34 @@ export const MyTickets = () => {
 
   return (
     <>
-      <div className="my-tickets">
-        <div className="my-tickets__container">
-          {!!tickets && !!tickets.length ? (
-            <>
-              {tickets.reverse().map((item: any, index: number) => {
-                return (
-                  <Fragment key={item.date}>
-                    <Ticket
-                      setActiveTicket={setActiveTicket}
-                      date={item.date}
-                      quantity={item.quantity}
-                      price={item.price}
-                      vagon={item.vagon}
-                    />
-                  </Fragment>
-                );
-              })}
-            </>
-          ) : (
-            <h1>Нет активных билетов</h1>
-          )}
+      <Fade in>
+        <div className="my-tickets">
+          <div className="my-tickets__container">
+            {!!tickets && !!tickets.length ? (
+              <>
+                {tickets.reverse().map((item: any, index: number) => {
+                  return (
+                    <Fragment key={item.date}>
+                      <Ticket
+                        setActiveTicket={setActiveTicket}
+                        date={item.date}
+                        quantity={item.quantity}
+                        price={item.price}
+                        vagon={item.vagon}
+                      />
+                    </Fragment>
+                  );
+                })}
+              </>
+            ) : (
+              <h1>Нет активных билетов</h1>
+            )}
+          </div>
+          <Button onClick={() => setIsCreateModalOpened(!isCreateModalOpened)}>
+            Отсканировать QR-код
+          </Button>
         </div>
-        <Button onClick={() => setIsCreateModalOpened(!isCreateModalOpened)}>
-          Отсканировать QR-код
-        </Button>
-      </div>
+      </Fade>
       <TicketScanner
         open={isCreateModalOpened}
         setOpen={setIsCreateModalOpened}
