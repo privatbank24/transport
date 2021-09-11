@@ -60,6 +60,12 @@
          }
       }
 
+      div{
+         display: flex;
+         justify-content: space-between;
+         width: 100%;
+      }
+
       button{
          width: 140px;
          background: $main-green-2;

@@ -2,6 +2,7 @@ import { Fade, IconButton, Modal } from "@material-ui/core";
 import React, { FC, useEffect, useRef, useState } from "react";
 import QrReader from "react-qr-reader";
 import "./index.scss";
+import { toast } from "react-toastify";
 import ClearIcon from "@material-ui/icons/Clear";
 import CropOriginalIcon from "@material-ui/icons/CropOriginal";
 import { ROUTES } from "../../utils/routes";
@@ -18,17 +19,21 @@ export const TicketScanner: FC<TicketScannerProps> = ({
   open,
   setOpen,
 }: TicketScannerProps) => {
-  const [isError, setIsError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const history = useHistory();
   const qrReader = useRef<any>(null);
   const [isLegacyModeActivated, setIsLegacyModeActivated] =
     useState<boolean>(false);
 
+  const notify = () =>
+    toast.error(() => (
+      <div className="toast__error-qr">
+        <p>Ошибка при обработке QR кода.</p>
+      </div>
+    ));
+
   const handleScan = (data: any) => {
     if (data) {
-      setIsLoading(true);
-
       setTimeout(() => {
         if (
           !data.includes("htt") &&
@@ -42,7 +47,7 @@ export const TicketScanner: FC<TicketScannerProps> = ({
         } else {
           setIsLoading(false);
           setOpen(false);
-          setIsError(true);
+          notify();
         }
       }, 2000);
     }
@@ -96,15 +101,21 @@ export const TicketScanner: FC<TicketScannerProps> = ({
               onError={handleError}
               onScan={handleScan}
               legacyMode={isLegacyModeActivated}
+              onImageLoad={() => {
+                setIsLoading(true);
+                const currentLocation = window.location.href;
+                setTimeout(() => {
+                  if (currentLocation === window.location.href) {
+                    notify();
+                    setIsLoading(false);
+                    setOpen(false);
+                  }
+                }, 3500);
+              }}
             />
           </div>
         </Fade>
       </Modal>
-      <ErrorModal
-        openCamera={() => setOpen(true)}
-        open={isError}
-        setOpen={setIsError}
-      />
       <LoaderLogo qr={true} open={isLoading} />
     </>
   );

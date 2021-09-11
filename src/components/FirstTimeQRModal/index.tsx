@@ -1,6 +1,8 @@
 import { Button, Fade, Modal } from "@material-ui/core";
 import React, { FC, useState } from "react";
+import { useHistory } from "react-router";
 import { sendCode } from "../../actions/authentication";
+import { ROUTES } from "../../utils/routes";
 import "./index.scss";
 
 type FirtsTimeQRModalProps = {
@@ -14,6 +16,7 @@ export const FirtsTimeQRModal: FC<FirtsTimeQRModalProps> = ({
   setOpen,
   setVagonNumber,
 }: FirtsTimeQRModalProps) => {
+  const history = useHistory();
   const [number, setNumber] = useState<string>("");
   const [isSendClicked, setIsSendClicked] = useState<boolean>(false);
 
@@ -39,18 +42,27 @@ export const FirtsTimeQRModal: FC<FirtsTimeQRModalProps> = ({
             }}
             placeholder="Номер"
           />
-          <Button
-            onClick={async () => {
-              if (localStorage.getItem("currentQR")) {
-                setIsSendClicked(true);
-                await sendCode(localStorage.getItem("currentQR"), number);
-                setVagonNumber(number);
-                setOpen(false);
-              }
-            }}
-          >
-            Отправить
-          </Button>
+          <div>
+            <Button
+              onClick={() => {
+                history.push(ROUTES.DASHBOARD);
+              }}
+            >
+              Назад
+            </Button>
+            <Button
+              onClick={async () => {
+                if (localStorage.getItem("currentQR")) {
+                  setIsSendClicked(true);
+                  await sendCode(localStorage.getItem("currentQR"), number);
+                  setVagonNumber(number);
+                  setOpen(false);
+                }
+              }}
+            >
+              Отправить
+            </Button>
+          </div>
         </div>
       </Fade>
     </Modal>

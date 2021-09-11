@@ -10,6 +10,10 @@
    background: $main-green-2;
 }
 
+.Toastify__toast--error{
+   background: #ff5a5c;
+}
+
 .toast__success-purchase{
    display: flex;
    padding: 5px;
@@ -28,5 +32,12 @@
             font-size: 13px;
          }
       }
+   }
+}
+
+.toast__error-qr{
+   p{
+      font-size: 22px;
+      font-weight: 600;
    }
 }
