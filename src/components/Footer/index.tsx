@@ -13,8 +13,14 @@ export const Footer: FC = () => {
       <IconButton>
         <HomeIcon />
       </IconButton>
-      <IconButton>
-        <AppIcon />
+      <IconButton className="apps">
+        {/* <AppIcon /> */}
+        <section>
+          <div id="sec1" />
+          <div id="sec2" />
+          <div id="sec3" />
+          <div id="sec4" />
+        </section>
       </IconButton>
       <IconButton>
         <ScanIcon />

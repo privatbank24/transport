@@ -14,11 +14,48 @@
       height: 30px;
       padding: 2px;
 
+      &.apps{
+         display: flex !important;
+         flex-direction: column !important;
+
+         div{
+            position: absolute;
+            width: 7px;
+            height: 7px;
+            border: 1px solid  $main-grey-2;
+            border-radius: 2px;
+         }
+
+         #sec1{
+            top: 6px;
+            left: 6px;
+         }
+
+         #sec2{
+            top: 6px;
+            right: 6px;
+            background: rgb(255, 71, 25);
+            border: 1px solid  rgb(255, 71, 25);
+         }
+
+         #sec3{
+            bottom: 6px;
+            right: 6px;
+         }
+
+         #sec4{
+            bottom: 6px;
+            left: 6px;
+         }
+      }
+
+      
+
       svg{
-         fill: $expired-transport-grey;
+         fill: $main-grey-2;
 
          path{
-            fill: $expired-transport-grey;
+            fill: $main-grey-2;
          }
       }
 
