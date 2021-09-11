@@ -20,6 +20,7 @@ export const TicketScanner: FC<TicketScannerProps> = ({
   setOpen,
 }: TicketScannerProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
   const history = useHistory();
   const qrReader = useRef<any>(null);
   const [isLegacyModeActivated, setIsLegacyModeActivated] =
@@ -34,22 +35,20 @@ export const TicketScanner: FC<TicketScannerProps> = ({
 
   const handleScan = (data: any) => {
     if (data) {
-      setTimeout(() => {
-        if (
-          !data.includes("htt") &&
-          !data.includes("com") &&
-          !data.includes("ua")
-        ) {
-          localStorage.setItem("currentQR", data);
-          setIsLoading(false);
-          setOpen(false);
-          history.push(ROUTES.PAY_FOR_TICKET);
-        } else {
-          setIsLoading(false);
-          setOpen(false);
-          notify();
-        }
-      }, 2000);
+      if (
+        !data.includes("htt") &&
+        !data.includes("com") &&
+        !data.includes("ua")
+      ) {
+        localStorage.setItem("currentQR", data);
+        setIsLoading(false);
+        setOpen(false);
+        history.push(ROUTES.PAY_FOR_TICKET);
+      } else {
+        setIsLoading(false);
+        setOpen(false);
+        setIsError(true);
+      }
     }
   };
 
@@ -70,6 +69,12 @@ export const TicketScanner: FC<TicketScannerProps> = ({
   useEffect(() => {
     setIsLegacyModeActivated(false);
   }, [open]);
+
+  useEffect(() => {
+    if (isError) {
+      notify();
+    }
+  }, [isError]);
 
   return (
     <>
@@ -106,9 +111,9 @@ export const TicketScanner: FC<TicketScannerProps> = ({
                 const currentLocation = window.location.href;
                 setTimeout(() => {
                   if (currentLocation === window.location.href) {
-                    notify();
                     setIsLoading(false);
                     setOpen(false);
+                    notify();
                   }
                 }, 3500);
               }}
