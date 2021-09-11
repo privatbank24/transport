@@ -18,6 +18,7 @@ import PaymentOutlinedIcon from "@material-ui/icons/PaymentOutlined";
 import AddRoundedIcon from "@material-ui/icons/AddRounded";
 import { ReactComponent as Hryvnia } from "../../images/hryvnia.svg";
 import TouchRipple from "@material-ui/core/ButtonBase/TouchRipple.js";
+import { Footer } from "../../components/Footer";
 
 export const HomePage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -52,104 +53,107 @@ export const HomePage = () => {
   return (
     <>
       <Fade in>
-        <div className="dashboard">
-          <div className="dashboard__top">
-            <div className="dashboard__top_section">
-              <IconButton className="account">
-                <PersonIcon />
-              </IconButton>
+        <>
+          <div className="dashboard">
+            <div className="dashboard__top">
+              <div className="dashboard__top_section">
+                <IconButton className="account">
+                  <PersonIcon />
+                </IconButton>
+              </div>
+              <p className="money">
+                <span>$</span> 26.62 <span>/</span> 26.73
+              </p>
+              <div className="dashboard__top_section">
+                <IconButton className="likes">
+                  <ThumbUpAltIcon />
+                </IconButton>
+                <IconButton className="messages">
+                  <ChatBubbleOutlineOutlinedIcon />
+                </IconButton>
+              </div>
             </div>
-            <p className="money">
-              <span>$</span> 26.62 <span>/</span> 26.73
-            </p>
-            <div className="dashboard__top_section">
-              <IconButton className="likes">
-                <ThumbUpAltIcon />
-              </IconButton>
-              <IconButton className="messages">
-                <ChatBubbleOutlineOutlinedIcon />
-              </IconButton>
+            <div className="dashboard__main">
+              <div className="dashboard__main_top">
+                <div>
+                  <AccountBalanceWalletOutlinedIcon />
+                  <p>Кошелек</p>
+                </div>
+                <NavigateNextOutlinedIcon />
+              </div>
+              {!!userCards && (
+                <div className="dashboard__main_cards">
+                  <Carousel
+                    interval={100000000}
+                    autoPlay={false}
+                    showArrows={false}
+                    showStatus={false}
+                    showIndicators={false}
+                    showThumbs={false}
+                    onChange={(e) => setActiveCardIndex(e)}
+                  >
+                    {userCards.map((item: any, index: number) => {
+                      return (
+                        <Fragment key={item.cardNumber + index}>
+                          {index === 0 ? (
+                            <Card name="Карта универсальная" card={item} />
+                          ) : (
+                            <Card
+                              name="Карта для выплат"
+                              card={item}
+                              type="visa"
+                            />
+                          )}
+                        </Fragment>
+                      );
+                    })}
+                  </Carousel>
+                </div>
+              )}
+              <div className="dashboard__main_dots">
+                <span className={activeCardIndex === 0 ? "active" : ""} />
+                <span className={activeCardIndex === 1 ? "active" : ""} />
+              </div>
+            </div>
+            <div
+              className={cx("dashboard__bottom", {
+                open: areOptionsShown,
+              })}
+              {...handlers}
+            >
+              <div className="dashboard__bottom_line" />
+              <div className="dashboard__bottom_options">
+                <div>
+                  <Button>
+                    <PhoneIphoneSharpIcon />
+                  </Button>
+                  <p>Пополнение мобильного</p>
+                </div>
+                <div>
+                  <Button>
+                    <PaymentOutlinedIcon />
+                  </Button>
+                  <p>
+                    Перевод <br /> на карту
+                  </p>
+                </div>
+                <div>
+                  <Button>
+                    <Hryvnia />
+                  </Button>
+                  <p>Платежи</p>
+                </div>
+                <div>
+                  <Button>
+                    <AddRoundedIcon />
+                  </Button>
+                  <p>Добавить</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="dashboard__main">
-            <div className="dashboard__main_top">
-              <div>
-                <AccountBalanceWalletOutlinedIcon />
-                <p>Кошелек</p>
-              </div>
-              <NavigateNextOutlinedIcon />
-            </div>
-            {!!userCards && (
-              <div className="dashboard__main_cards">
-                <Carousel
-                  interval={100000000}
-                  autoPlay={false}
-                  showArrows={false}
-                  showStatus={false}
-                  showIndicators={false}
-                  showThumbs={false}
-                  onChange={(e) => setActiveCardIndex(e)}
-                >
-                  {userCards.map((item: any, index: number) => {
-                    return (
-                      <Fragment key={item.cardNumber + index}>
-                        {index === 0 ? (
-                          <Card name="Карта универсальная" card={item} />
-                        ) : (
-                          <Card
-                            name="Карта для выплат"
-                            card={item}
-                            type="visa"
-                          />
-                        )}
-                      </Fragment>
-                    );
-                  })}
-                </Carousel>
-              </div>
-            )}
-            <div className="dashboard__main_dots">
-              <span className={activeCardIndex === 0 ? "active" : ""} />
-              <span className={activeCardIndex === 1 ? "active" : ""} />
-            </div>
-          </div>
-          <div
-            className={cx("dashboard__bottom", {
-              open: areOptionsShown,
-            })}
-            {...handlers}
-          >
-            <div className="dashboard__bottom_line" />
-            <div className="dashboard__bottom_options">
-              <div>
-                <Button>
-                  <PhoneIphoneSharpIcon />
-                </Button>
-                <p>Пополнение мобильного</p>
-              </div>
-              <div>
-                <Button>
-                  <PaymentOutlinedIcon />
-                </Button>
-                <p>
-                  Перевод <br /> на карту
-                </p>
-              </div>
-              <div>
-                <Button>
-                  <Hryvnia />
-                </Button>
-                <p>Платежи</p>
-              </div>
-              <div>
-                <Button>
-                  <AddRoundedIcon />
-                </Button>
-                <p>Добавить</p>
-              </div>
-            </div>
-          </div>
-        </div>
+          <Footer />
+        </>
       </Fade>
       <LoaderLogo open={isStartModalShown || isLoading} login={true} />
     </>

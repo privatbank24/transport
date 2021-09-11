@@ -1,0 +1,55 @@
+@import '/src/scss/variables.scss';
+
+.footer{
+   position: absolute;
+   bottom: 0;
+   display: flex;
+   justify-content: space-around;
+   width: 100%;
+   padding: 10px 0 20px 0;
+   background: $main-grey-footer;
+
+   button{
+      width: 30px;
+      height: 30px;
+      padding: 2px;
+
+      svg{
+         fill: $expired-transport-grey;
+
+         path{
+            fill: $expired-transport-grey;
+         }
+      }
+
+      &:nth-of-type(1){
+         svg{
+            transform: scale(1.5);
+         }
+      }
+
+
+      &:nth-of-type(3){
+         svg{
+            fill: none;
+            stroke: $main-grey-2;
+
+            path{
+               fill: none;
+            }
+         }
+      }
+      
+      &:nth-of-type(4){
+         svg{
+            transform: scale(0.9);
+         }
+      }
+
+      &:nth-of-type(5){
+         svg{
+            transform: scale(1.2);
+         }
+      }
+   }
+}
