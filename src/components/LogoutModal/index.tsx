@@ -1,18 +1,19 @@
 import { Button, Fade, Modal } from "@material-ui/core";
-import React, { FC, useState } from "react";
+import { FC } from "react";
 import "../DeleteTicketModal/index.scss";
-import ClearIcon from "@material-ui/icons/Clear";
 
 type LogoutModalProps = {
   open: boolean;
   setOpen: (value: boolean) => void;
   logout: () => void;
+  goBack?: () => void;
 };
 
 export const LogoutModal: FC<LogoutModalProps> = ({
   open,
   setOpen,
   logout,
+  goBack,
 }: LogoutModalProps) => {
   return (
     <Modal open={open} className="delete-ticket">
@@ -20,7 +21,16 @@ export const LogoutModal: FC<LogoutModalProps> = ({
         <div className="delete-ticket__content">
           <h2>Вы действительно хотите выйти из приложения?</h2>
           <div>
-            <Button onClick={() => setOpen(false)}>Нет</Button>
+            <Button
+              onClick={() => {
+                setOpen(false);
+                if (goBack) {
+                  goBack();
+                }
+              }}
+            >
+              Нет
+            </Button>
             <Button
               onClick={() => {
                 logout();

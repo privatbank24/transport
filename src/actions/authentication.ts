@@ -1,6 +1,7 @@
 import axios from "axios";
 import history from "../utils/history";
 import { ROUTES } from "../utils/routes";
+import { logout } from "./logout";
 
 export const signIn = async (username: string, password: string): Promise<void> => {
    try {
@@ -26,8 +27,7 @@ export const checkToken = async (): Promise<void> => {
          });
       } catch (error: any) {
          console.log(error.message);
-         localStorage.removeItem('token');
-         history.push(ROUTES.LOGIN);
+         logout();
          throw error;
       }
    }
