@@ -20,12 +20,14 @@ import { ReactComponent as Hryvnia } from "../../images/hryvnia.svg";
 import TouchRipple from "@material-ui/core/ButtonBase/TouchRipple.js";
 import { Footer } from "../../components/Footer";
 import { TicketScanner } from "../../components/TicketScanner";
+import { changePageTitle } from "../../utils/changePageTitle";
 
 export const HomePage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isStartModalShown, setIsStartModalShown] = useState<boolean>(
     JSON.parse(localStorage.getItem("isLoadingModalShown")!)
   );
+  const token = localStorage.getItem("token");
   const userCards = JSON.parse(localStorage.getItem("userCards")!);
   const [activeCardIndex, setActiveCardIndex] = useState<number>(0);
   const [areOptionsShown, setAreOptionsShown] = useState<boolean>(false);
@@ -37,18 +39,21 @@ export const HomePage = () => {
   });
 
   useEffect(() => {
-    if (!userCards) {
-      setIsLoading(true);
-      generateCards();
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1500);
-    }
-    if (isStartModalShown) {
-      setTimeout(() => {
-        setIsStartModalShown(false);
-        localStorage.setItem("isLoadingModalShown", "false");
-      }, 1500);
+    if (token) {
+      changePageTitle("home");
+      if (!userCards) {
+        setIsLoading(true);
+        generateCards();
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1500);
+      }
+      if (isStartModalShown) {
+        setTimeout(() => {
+          setIsStartModalShown(false);
+          localStorage.setItem("isLoadingModalShown", "false");
+        }, 1500);
+      }
     }
   }, []);
 

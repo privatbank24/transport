@@ -1,7 +1,8 @@
 import { Button, Tooltip } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { checkToken, signIn } from "../../actions/authentication";
+import { changePageTitle } from "../../utils/changePageTitle";
 import { ROUTES } from "../../utils/routes";
 import "./index.scss";
 
@@ -24,6 +25,10 @@ export const SignIn = () => {
       }
     }
   };
+
+  useEffect(() => {
+    changePageTitle("login");
+  }, []);
 
   return (
     <div className="login">
