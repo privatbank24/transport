@@ -18,8 +18,7 @@ export const LogoutModal: FC<LogoutModalProps> = ({
     <Modal open={open} className="delete-ticket">
       <Fade in={open}>
         <div className="delete-ticket__content">
-          <h2>Вы точно хотите выйти?</h2>
-          <p>(все билеты будут удалены)</p>
+          <h2>Вы действительно хотите выйти из приложения?</h2>
           <div>
             <Button onClick={() => setOpen(false)}>Нет</Button>
             <Button

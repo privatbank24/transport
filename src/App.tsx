@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Router, Switch, Route, Link } from "react-router-dom";
 import "./scss/index.scss";
 import { MyTickets } from "./pages/MyTickets";
 import { SignIn } from "./pages/SignIn";
@@ -42,7 +42,7 @@ export const App: FC = () => {
   }, [token]);
 
   return (
-    <Router>
+    <Router history={history}>
       <div className="App">
         <ToastContainer
           icon={false}

@@ -1,4 +1,4 @@
-import { Button, Fade, IconButton } from "@material-ui/core";
+import { Button, Fade, IconButton, Menu, MenuItem } from "@material-ui/core";
 import { Fragment, useEffect, useState } from "react";
 import PersonIcon from "@material-ui/icons/Person";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
@@ -17,10 +17,11 @@ import PhoneIphoneSharpIcon from "@material-ui/icons/PhoneIphoneSharp";
 import PaymentOutlinedIcon from "@material-ui/icons/PaymentOutlined";
 import AddRoundedIcon from "@material-ui/icons/AddRounded";
 import { ReactComponent as Hryvnia } from "../../images/hryvnia.svg";
-import TouchRipple from "@material-ui/core/ButtonBase/TouchRipple.js";
 import { Footer } from "../../components/Footer";
 import { TicketScanner } from "../../components/TicketScanner";
 import { changePageTitle } from "../../utils/changePageTitle";
+import { LogoutModal } from "../../components/LogoutModal";
+import { logout } from "../../actions/logout";
 
 export const HomePage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -32,6 +33,9 @@ export const HomePage = () => {
   const [activeCardIndex, setActiveCardIndex] = useState<number>(0);
   const [areOptionsShown, setAreOptionsShown] = useState<boolean>(false);
   const [isQRScannerOpened, setIsQRScannerOpened] = useState<boolean>(false);
+  const [isLogoutModalOpened, setIsLogoutModalOpened] =
+    useState<boolean>(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handlers = useSwipeable({
     onSwipedUp: (e: any) => setAreOptionsShown(true),
@@ -55,7 +59,15 @@ export const HomePage = () => {
         }, 1500);
       }
     }
-  }, []);
+  }, [isStartModalShown, token, userCards]);
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const openMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
 
   return (
     <>
@@ -63,9 +75,24 @@ export const HomePage = () => {
         <div className="dashboard">
           <div className="dashboard__top">
             <div className="dashboard__top_section">
-              <IconButton className="account">
+              <IconButton className="account" onClick={openMenu}>
                 <PersonIcon />
               </IconButton>
+              <Menu
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                    setIsLogoutModalOpened(true);
+                  }}
+                >
+                  Выйти
+                </MenuItem>
+              </Menu>
             </div>
             <p className="money">
               <span>$</span> 26.62 <span>/</span> 26.73
@@ -162,6 +189,15 @@ export const HomePage = () => {
       </Fade>
       <TicketScanner open={isQRScannerOpened} setOpen={setIsQRScannerOpened} />
       <LoaderLogo open={isStartModalShown || isLoading} login={true} />
+      <LogoutModal
+        open={isLogoutModalOpened}
+        setOpen={setIsLogoutModalOpened}
+        logout={() => {
+          setTimeout(() => {
+            logout();
+          }, 300);
+        }}
+      />
     </>
   );
 };

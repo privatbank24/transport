@@ -27,7 +27,7 @@ export const checkToken = async (): Promise<void> => {
       } catch (error: any) {
          console.log(error.message);
          localStorage.removeItem('token');
-         window.location.href = 'http://localhost:3001/';
+         history.push(ROUTES.LOGIN);
          throw error;
       }
    }

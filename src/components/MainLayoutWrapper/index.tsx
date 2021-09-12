@@ -113,17 +113,6 @@ export const MainLayoutWrapper = ({ children }: any) => {
         </div>
         <div className="main-layout__container">{children}</div>
       </div>
-      <LogoutModal
-        open={isLogoutModalOpened}
-        setOpen={setIsLogoutModalOpened}
-        logout={() => {
-          setTimeout(() => {
-            setIsNavbarOpened(false);
-            localStorage.clear();
-            window.location.href = "http://localhost:3001/";
-          }, 300);
-        }}
-      />
     </>
   );
 };
