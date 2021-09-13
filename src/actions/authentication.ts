@@ -33,6 +33,21 @@ export const checkToken = async (): Promise<void> => {
    }
 }
 
+export const checkTokenOnSignInPage = async (): Promise<void> => {
+   if (history.location.pathname === ROUTES.LOGIN) {
+      try {
+         const token = localStorage.getItem('token');
+         await axios.get('http://localhost:3000/categories', {
+            headers: { 'Authorization': `Bearer ${token}`}
+         });
+      } catch (error: any) {
+         console.log(error.message);
+         logout();
+         throw error;
+      }
+   }
+}
+
 export const getAllTickets = async (): Promise<any> => {
    try {
       const token = localStorage.getItem('token');

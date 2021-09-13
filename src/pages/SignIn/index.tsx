@@ -1,7 +1,7 @@
 import { Button } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { signIn } from "../../actions/authentication";
+import { checkTokenOnSignInPage, signIn } from "../../actions/authentication";
 import { logout } from "../../actions/logout";
 import { LogoutModal } from "../../components/LogoutModal";
 import { changePageTitle } from "../../utils/changePageTitle";
@@ -31,9 +31,21 @@ export const SignIn = () => {
     }
   };
 
+  const tokenCheck = async () => {
+    if (token) {
+      setIsLogoutModalOpened(true);
+      try {
+        await checkTokenOnSignInPage();
+      } catch (error) {
+        logout();
+        setIsLogoutModalOpened(false);
+      }
+    }
+  };
+
   useEffect(() => {
     changePageTitle("login");
-    if (token) setIsLogoutModalOpened(true);
+    tokenCheck();
   }, [token]);
 
   return (
