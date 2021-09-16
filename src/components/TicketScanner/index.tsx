@@ -53,7 +53,7 @@ export const TicketScanner: FC<TicketScannerProps> = ({
   };
 
   const handleError = (err: any) => {
-    console.error(err);
+    notify();
   };
 
   const openImageDialog = () => {
@@ -114,6 +114,7 @@ export const TicketScanner: FC<TicketScannerProps> = ({
                     setIsLoading(false);
                     setOpen(false);
                     notify();
+                    setIsLegacyModeActivated(false);
                   }
                 }, 3500);
               }}
