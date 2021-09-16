@@ -108,7 +108,7 @@ export const TicketScanner: FC<TicketScannerProps> = ({
             <QrReader
               resolution={1000}
               ref={qrReader}
-              delay={500}
+              delay={200}
               onError={handleError}
               onScan={handleScan}
               legacyMode={isLegacyModeActivated}
