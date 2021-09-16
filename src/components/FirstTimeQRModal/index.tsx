@@ -54,7 +54,7 @@ export const FirtsTimeQRModal: FC<FirtsTimeQRModalProps> = ({
               onClick={async () => {
                 if (localStorage.getItem("currentQR")) {
                   setIsSendClicked(true);
-                  await sendCode(localStorage.getItem("currentQR"), number);
+                  // await sendCode(localStorage.getItem("currentQR"), number);
                   setVagonNumber(number);
                   setOpen(false);
                 }

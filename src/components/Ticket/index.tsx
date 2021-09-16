@@ -5,9 +5,11 @@ import vtk from "../../images/vtk.png";
 import Timer from "../Timer";
 import cx from "classnames";
 import { useLongPress } from "use-long-press";
+import { generateRandomNumber } from "../../actions/generateCards";
 
 type TicketProps = {
   date?: any;
+  seria?: number;
   quantity?: number;
   price?: number;
   vagon?: string;
@@ -20,6 +22,7 @@ export const Ticket: FC<TicketProps> = ({
   price = 8,
   vagon = "276",
   setActiveTicket,
+  seria = 890348533,
 }: TicketProps) => {
   const [minutes, setMinutes] = useState<number | null>(null);
   const [seconds, setSeconds] = useState<number | null>(null);
@@ -66,7 +69,7 @@ export const Ticket: FC<TicketProps> = ({
               <p>Вінниця</p>
               <p>КП Вінницька транспортна компанія</p>
               <p>
-                Серия <span>196011268</span>
+                Серия <span>{seria}</span>
               </p>
             </div>
           </div>

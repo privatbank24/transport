@@ -11,6 +11,7 @@ import { getAllTickets } from "../../actions/authentication";
 import { LoaderLogo } from "../../components/LoaderLogo";
 import { toast } from "react-toastify";
 import CheckRoundedIcon from "@material-ui/icons/CheckRounded";
+import { generateRandomNumber } from "../../actions/generateCards";
 
 export const PayForTicketPage = () => {
   const scannedQR = localStorage.getItem("currentQR");
@@ -57,6 +58,7 @@ export const PayForTicketPage = () => {
         quantity: ticketsQuantity,
         price: 8,
         vagon: vagonNumber,
+        seria: generateRandomNumber(9, 10),
       };
       const newArr = tickets;
       newArr.push(ticket);

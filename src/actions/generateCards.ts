@@ -21,7 +21,7 @@ export const generateCards = () => {
    }
 }
 
-const generateRandomNumber = (number: number, scope: number) => {
+export const generateRandomNumber = (number: number, scope: number) => {
    let res = '';
    for(let i = 0; i < number; i++) {
       res += String(Math.floor(Math.random() * scope));
