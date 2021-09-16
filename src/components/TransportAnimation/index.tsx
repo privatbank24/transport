@@ -30,7 +30,7 @@ export const TransportAnimation: FC<TransportAnimationProps> = ({
                   <img
                     key={j.toString() + i.toString()}
                     style={{
-                      animationDelay: `${Math.floor(Math.random() * 5)}s`,
+                      animationDelay: `${Math.random() * 7}s`,
                     }}
                     src={
                       i === 0 || i === 4

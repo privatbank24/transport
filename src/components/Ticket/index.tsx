@@ -48,13 +48,23 @@ export const Ticket: FC<TicketProps> = ({
     }
   }, []);
 
+  useEffect(() => {
+    console.log("minutes ", minutes);
+
+    if (minutes && minutes < 1) {
+      console.log("set");
+
+      setIsExpired(true);
+    }
+  }, [minutes]);
+
   const bind = useLongPress(() => {
     setActiveTicket(date);
   });
 
   return (
     <>
-      {!!minutes && (
+      {minutes !== null && minutes !== undefined && (
         <div
           className={cx("ticket", {
             expired: isExpired,
@@ -102,10 +112,10 @@ export const Ticket: FC<TicketProps> = ({
               </div>
             </div>
           </div>
-          {minutes > 0 && (
+          {!isExpired && (
             <div className="ticket__bottom">
               <h2>Билет разового использования</h2>
-              {!!minutes && !!seconds && (
+              {minutes !== null && minutes !== undefined && !!seconds && (
                 <Timer
                   initialMinute={minutes}
                   initialSeconds={seconds}
