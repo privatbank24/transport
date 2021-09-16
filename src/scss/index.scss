@@ -20,6 +20,10 @@
    }
 }
 
+input, input:before, input:after {
+   user-select: initial;
+} 
+
 body{
    background: $main-dark-2;
 }
