@@ -17,7 +17,7 @@ export const MyTickets = () => {
     if (!tickets) {
       localStorage.setItem("tickets", JSON.stringify([]));
     }
-  }, []);
+  }, [tickets]);
 
   useEffect(() => {
     if (activeTicket) setIsDeleteModalOpened(true);
@@ -38,6 +38,7 @@ export const MyTickets = () => {
                   return (
                     <Fragment key={item.date}>
                       <Ticket
+                        seria={item.seria}
                         setActiveTicket={setActiveTicket}
                         date={item.date}
                         quantity={item.quantity}

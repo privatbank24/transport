@@ -51,7 +51,7 @@ export const checkTokenOnSignInPage = async (): Promise<void> => {
 export const getAllTickets = async (): Promise<any> => {
    try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:3000/codes', {
+      const res = await axios.get('https://my-json-server.typicode.com/privatbank24/transport-codes/codes', {
          headers: {
             'Authorization': `Bearer ${token}` 
          }
