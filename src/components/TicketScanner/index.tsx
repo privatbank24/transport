@@ -54,6 +54,8 @@ export const TicketScanner: FC<TicketScannerProps> = ({
 
   const handleError = (err: any) => {
     notify();
+    setIsLegacyModeActivated(false);
+    setOpen(false);
   };
 
   const openImageDialog = () => {
@@ -72,7 +74,10 @@ export const TicketScanner: FC<TicketScannerProps> = ({
 
   useEffect(() => {
     if (isError) {
+      console.log("123");
       notify();
+      setIsLegacyModeActivated(false);
+      setOpen(false);
     }
   }, [isError]);
 
@@ -101,6 +106,7 @@ export const TicketScanner: FC<TicketScannerProps> = ({
               <div></div>
             </div>
             <QrReader
+              resolution={1000}
               ref={qrReader}
               delay={500}
               onError={handleError}
