@@ -63,7 +63,8 @@ export const PayForTicketPage = () => {
       const newArr = tickets;
       newArr.push(ticket);
       localStorage.setItem("tickets", JSON.stringify(newArr));
-      history.push(ROUTES.MY_TICKETS);
+      localStorage.removeItem("currentQR");
+      history.replace(ROUTES.MY_TICKETS);
       notify();
     }, 2000);
   };
@@ -84,6 +85,12 @@ export const PayForTicketPage = () => {
       }
     }
   }, [knownQRs]);
+
+  useEffect(() => {
+    if (!scannedQR) {
+      history.push(ROUTES.DASHBOARD);
+    }
+  }, [scannedQR]);
 
   return (
     <>

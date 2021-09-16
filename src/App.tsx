@@ -11,12 +11,16 @@ import "react-toastify/dist/ReactToastify.css";
 import { Slide } from "react-toastify";
 import "./scss/toaster.scss";
 import { HomePage } from "./pages/HomePage";
+import { Instruction } from "./pages/Instruction";
 
 export const App: FC = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === ROUTES.DASHBOARD) {
+    if (
+      location.pathname === ROUTES.DASHBOARD ||
+      location.pathname === ROUTES.INSTRUCTION
+    ) {
       document.querySelector("body")?.setAttribute("style", "overflow: hidden");
     } else {
       document.querySelector("body")?.setAttribute("style", "overflow: auto");
@@ -49,6 +53,9 @@ export const App: FC = () => {
           </Route>
           <Route exact path={ROUTES.PAY_FOR_TICKET}>
             <PayForTicketPage />
+          </Route>
+          <Route exact path={ROUTES.INSTRUCTION}>
+            <Instruction />
           </Route>
         </MainLayoutWrapper>
       </Switch>

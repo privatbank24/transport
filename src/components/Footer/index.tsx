@@ -2,7 +2,6 @@ import { IconButton } from "@material-ui/core";
 import { FC } from "react";
 import NotificationsNoneOutlinedIcon from "@material-ui/icons/NotificationsNoneOutlined";
 import { ReactComponent as HomeIcon } from "../../images/home.svg";
-import { ReactComponent as AppIcon } from "../../images/apps.svg";
 import { ReactComponent as ScanIcon } from "../../images/scan.svg";
 import { ReactComponent as InboxIcon } from "../../images/inbox.svg";
 import "./index.scss";
@@ -18,11 +17,10 @@ export const Footer: FC<FooterProps> = ({ openScanner }) => {
 
   return (
     <footer className="footer">
-      <IconButton>
+      <IconButton onClick={() => history.push(ROUTES.DASHBOARD)}>
         <HomeIcon />
       </IconButton>
       <IconButton className="apps">
-        {/* <AppIcon /> */}
         <section>
           <div id="sec1" />
           <div id="sec2" />
@@ -36,7 +34,7 @@ export const Footer: FC<FooterProps> = ({ openScanner }) => {
       <IconButton onClick={() => history.push(ROUTES.MY_TICKETS)}>
         <InboxIcon />
       </IconButton>
-      <IconButton>
+      <IconButton onClick={() => history.push(ROUTES.INSTRUCTION)}>
         <NotificationsNoneOutlinedIcon />
       </IconButton>
     </footer>

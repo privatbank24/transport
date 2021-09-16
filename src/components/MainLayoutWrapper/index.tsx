@@ -61,7 +61,9 @@ export const MainLayoutWrapper = ({ children }: any) => {
         <div className="main-layout__navigation">
           <div
             className={cx("main-layout__navigation_top", {
-              hidden: window.location.pathname === ROUTES.DASHBOARD,
+              hidden:
+                window.location.pathname === ROUTES.DASHBOARD ||
+                window.location.pathname === ROUTES.INSTRUCTION,
             })}
           >
             {window.location.pathname === ROUTES.MY_TICKETS ||

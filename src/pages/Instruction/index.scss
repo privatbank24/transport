@@ -1,0 +1,65 @@
+@import '/src/scss/variables.scss';
+
+.instruction{
+   margin-top: -100px;
+
+   &__content{
+      padding: 0 20px 20px;
+
+      div{
+         display: flex;
+         margin-top: 20px;
+
+         p{
+            width: 80%;
+            text-align: justify;
+         }
+
+         div{
+            display: flex;
+            justify-content: center;
+            width: 20%;
+            margin-top: 0;
+            padding-left: 20px;
+            
+            span{
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               height: 40px;
+               width: 40px;
+               padding: 5px;
+               border-radius: 100px;
+               background: $main-grey-2;
+
+               svg{
+                  width: 30px;
+                  height: 30px;
+                  fill: white;
+                  stroke: white;  
+               }
+            }
+
+            #sec1{
+               svg, path{
+                  fill: none;
+               }
+            }
+
+            #sec2{
+               svg{
+                  transform: scale(0.85);
+               }
+            }
+
+            #sec3{
+               svg{
+                  path{
+                     fill: transparent;
+                  }
+               }
+            }
+         }
+      }
+   }
+}
