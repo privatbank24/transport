@@ -102,7 +102,7 @@ export const PayForTicketPage = () => {
                 <div className="checkout__main_options">
                   <div className="checkout__main_options_left">
                     <img
-                      src={`/cards/card (${userCards[0].cardImageIndex}).jpg`}
+                      src={`./cards/card (${userCards[0].cardImageIndex}).jpg`}
                       alt="card"
                     />
                   </div>
@@ -118,7 +118,7 @@ export const PayForTicketPage = () => {
                 <div className="checkout__main_options">
                   <div className="checkout__main_options_left">
                     <img
-                      src={`/cards/card (${userCards[1].cardImageIndex}).jpg`}
+                      src={`./cards/card (${userCards[1].cardImageIndex}).jpg`}
                       alt="card"
                     />
                   </div>

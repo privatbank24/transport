@@ -20,7 +20,7 @@ export const Card: FC<CardProps> = ({
     <div
       className="card-component"
       style={{
-        background: `url('/cards/card (${card.cardImageIndex}).jpg')`,
+        background: `url('./cards/card (${card.cardImageIndex}).jpg')`,
       }}
     >
       <div className="card-component__content">
